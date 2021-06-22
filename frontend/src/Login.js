@@ -1,0 +1,80 @@
+import React from 'react'
+import { Form, Button,Card,Alert } from 'react-bootstrap'
+import { useRef,useState } from 'react'
+import { useAuth } from "./AuthContext"
+import { Link ,useHistory} from 'react-router-dom'
+import { connect } from 'react-redux';
+import { setUsername } from './store/actions/dashboardActions';
+
+const Login =  function ({saveUsername}){
+ 
+    const usernameRef = useRef()
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    
+    const { login } = useAuth()
+    const [error, setError] = useState("")
+   
+    const [loading, setLoading] = useState(false)
+     const history = useHistory()
+
+    async function handleSubmit(e) {
+      e.preventDefault()
+  
+      try {
+        setError("")
+        setLoading(true)
+        // console.log(emailRef.current.value)
+       
+        await login(emailRef.current.value, passwordRef.current.value)
+        setLoading(false)
+        saveUsername(usernameRef.current.value);
+         history.push("/")
+      } catch {
+        setLoading(false)
+        setError("Failed to sign in")
+      }
+      
+      
+    }
+
+    return(
+        <div>
+        <Card style={{height:"65%",padding:"20px",paddingBottom:"30px"}}>
+        <h2 className="text-center mb-4 mt-10">Login</h2>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+        <Form.Group id="username" >
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" ref={usernameRef} required />
+            </Form.Group>
+        <Form.Group id="email" >
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+            <Form.Group id="password">
+              <Form.Label style={{marginTop:"10px"}}>Password</Form.Label>
+              <Form.Control type="password" ref={passwordRef} required />
+            </Form.Group>
+           
+            <Button disabled ={loading} className = "w-100" type="submit" style={{marginTop:"10px",marginBottom:"10px",backgroundColor:"black"
+          }}>Log in</Button>
+          </Form>
+          <div style={{marginTop:"10px"}}>
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </div>
+        </Card>
+        
+        <div className="w-100 text-center mt-10" style={{color:"white",marginTop:"10px"}}>
+        Need an account? <Link to="/signup" >Sign up</Link> 
+      </div>
+    </div>
+    )
+}
+const mapActionsToProps = (dispatch) => {
+  return {
+    saveUsername: username => dispatch(setUsername(username))
+  };
+};
+
+export default connect(null, mapActionsToProps)(Login)
