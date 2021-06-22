@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 import io from "socket.io-client"
+import { Link } from "react-router-dom"
 import "./PeerCall.css"
 
 
@@ -31,8 +32,10 @@ function PeerCall() {
 				myVideo.current.srcObject = stream
 		})
 
+
 	socket.on("me", (id) => {
 			setMe(id)
+            console.log("working")
 		})
 
 		socket.on("callUser", (data) => {
@@ -55,7 +58,9 @@ function PeerCall() {
 				signalData: data,
 				from: me,
 				name: name
+              
 			})
+            console.log('calling peer')
 		})
 		peer.on("stream", (stream) => {
 			
@@ -87,7 +92,21 @@ function PeerCall() {
 		peer.signal(callerSignal)
 		connectionRef.current = peer
 	}
-
+    function stopStreamedVideo(videoElem) {
+        const stream = videoElem.srcObject;
+        const tracks = stream.getTracks();
+      
+        tracks.forEach(function(track) {
+          track.stop();
+        });
+      
+        videoElem.srcObject = null;
+      }
+    
+      const handleClick = ()=>{
+          stopStreamedVideo(myVideo.current)
+         
+      }
 	const leaveCall = () => {
 		setCallEnded(true)
 		connectionRef.current.destroy()
@@ -141,11 +160,12 @@ function PeerCall() {
 					)}
 					{idToCall}
 				</div>
+                <Link to="/"><Button onClick={handleClick}>Home</Button></Link>
 			</div>
 			<div>
 				{receivingCall && !callAccepted ? (
 						<div className="caller">
-						<h1 >{name} is calling...</h1>
+						<h1 style={{color:"white"}}>{name} is calling...</h1>
 						<Button variant="contained" color="primary" onClick={answerCall}>
 							Answer
 						</Button>
@@ -156,5 +176,6 @@ function PeerCall() {
 		</>
 	)
 }
+
 
 export default PeerCall
