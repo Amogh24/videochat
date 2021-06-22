@@ -45,7 +45,7 @@ function PeerCall() {
 			setName(data.name)
 			setCallerSignal(data.signal)
 		})
-	}, [])
+	}, [callEnded])
 
 	const callUser = (id) => {
 		const peer = new Peer({
@@ -115,7 +115,7 @@ function PeerCall() {
 	      setIdToCall("")
 	      setCallEnded(true)
 	      setName("")
-		  connectionRef.current.destroy()
+		  if(connectionRef.current!=null)connectionRef.current.destroy()
 		  history.push("/")
 
       }
