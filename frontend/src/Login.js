@@ -40,6 +40,7 @@ const Login =  function ({saveUsername}){
 
     return(
         <div>
+          <h1 style={{color:"white",width:"400px",marginBottom:"10px"}}> VideoChat</h1>
         <Card style={{height:"65%",padding:"20px",paddingBottom:"30px"}}>
         <h2 className="text-center mb-4 mt-10">Login</h2>
         {error && <Alert variant="danger">{error}</Alert>}
