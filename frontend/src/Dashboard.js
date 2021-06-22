@@ -29,7 +29,7 @@ export default function Dashboard({username}) {
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
           <br/><br/>
-          <Button style={{backgroundColor:"black"}}>peer to peer call</Button>
+          <Link to="/peer-to-peer"><Button style={{backgroundColor:"black"}}>peer to peer call</Button></Link>
           {/* <Link to="/update-profile" className="btn btn-dark w-100 mt-3">
             Update Profile
           </Link> */}

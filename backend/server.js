@@ -1,24 +1,14 @@
-const express = require('express')
-const socket = require('socket.io')
-
-const PORT = 5000;
-
-const app = express();
-const server = app.listen(PORT,()=>{
-    console.log(`server listening on port ${PORT}`)
+const express = require("express")
+const http = require("http")
+const app = express()
+const server = http.createServer(app)
+const io = require("socket.io")(server, {
+	cors: {
+		origin: "http://localhost:3000",
+		methods: [ "GET", "POST" ]
+	}
 })
 
-const io = socket(server,{
-    cors:{
-        origin:'*',
-        methods:['GET','POST']
-    }
-})
-
-// io.on('connection',(socket)=>{
-//     socket.emit('connection',null);
-//     console.log('new user connected',socket.id);
-// })
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id)
 
@@ -34,3 +24,5 @@ io.on("connection", (socket) => {
 		io.to(data.to).emit("callAccepted", data.signal)
 	})
 })
+
+server.listen(5000, () => console.log("server is running on port 5000"))
