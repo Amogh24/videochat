@@ -18,6 +18,7 @@ function App() {
   useEffect(()=>{
     connectWithWebSocket()
   },[])
+  // "linear-gradient(to right, #000000, #434343)"
   return (
     <div className="App" style={{background:"linear-gradient(to right, #000000, #434343)"}}>
       <Container

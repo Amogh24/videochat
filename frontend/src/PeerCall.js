@@ -7,12 +7,13 @@ import React, { useEffect, useRef, useState } from "react"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 import io from "socket.io-client"
-import { Link } from "react-router-dom"
+import { useHistory} from "react-router-dom"
  import "./PeerCall.css"
 
 
 const socket = io.connect('http://localhost:5000')
 function PeerCall() {
+	const history = useHistory()
 	const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
 	const [ receivingCall, setReceivingCall ] = useState(false)
@@ -105,11 +106,23 @@ function PeerCall() {
     
       const handleClick = ()=>{
           stopStreamedVideo(myVideo.current)
-         
+          setMe("")
+          setStream()
+          setReceivingCall(false)
+          setCaller("")
+		  setCallerSignal()
+	      setCallAccepted(false)
+	      setIdToCall("")
+	      setCallEnded(true)
+	      setName("")
+		  connectionRef.current.destroy()
+		  history.push("/")
+
       }
 	const leaveCall = () => {
 		setCallEnded(true)
 		connectionRef.current.destroy()
+	    
 	}
 
 	return (
@@ -160,7 +173,7 @@ function PeerCall() {
 					)}
 					{idToCall}
 				</div>
-                <Link to="/"><Button onClick={handleClick}>Home</Button></Link>
+                <Button style={{backgroundColor:"black",color:"white"}}onClick={handleClick}>Home</Button>
 			</div>
 			<div>
 				{receivingCall && !callAccepted ? (
