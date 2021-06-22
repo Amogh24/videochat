@@ -8,7 +8,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 import io from "socket.io-client"
 import { Link } from "react-router-dom"
-import "./PeerCall.css"
+ import "./PeerCall.css"
 
 
 const socket = io.connect('http://localhost:5000')
@@ -114,11 +114,11 @@ function PeerCall() {
 
 	return (
 		<>
-			<h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
+			<h1 style={{ color: '#fff',marginTop:"10%" }}>Video Room</h1>
 		<div className="container">
 			<div className="video-container">
 				<div className="video">
-					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px", }} />}
 				</div>
 				<div className="video">
 					{callAccepted && !callEnded ?
