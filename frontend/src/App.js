@@ -34,7 +34,7 @@ function App() {
          
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
-              <Route path="/peer-to-peer" component={PeerCall}/>
+              <PrivateRoute path="/peer-to-peer" component={PeerCall}/>
               <Route path="/forgot-password" component={ForgotPassword} /> 
             </Switch>
           </AuthProvider>

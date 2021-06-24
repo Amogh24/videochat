@@ -122,7 +122,17 @@ function PeerCall() {
 	const leaveCall = () => {
 		setCallEnded(true)
 		connectionRef.current.destroy()
-	    
+		stopStreamedVideo(myVideo.current)
+		setMe("")
+		setStream()
+		setReceivingCall(false)
+		setCaller("")
+		setCallerSignal()
+		setCallAccepted(false)
+		setIdToCall("")
+		setCallEnded(false)
+		setName("")
+		history.push("/")
 	}
 
 	return (
