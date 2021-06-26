@@ -1,5 +1,5 @@
 
- import './App.css';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from "./signup"
 import { AuthProvider } from "./AuthContext"
@@ -11,7 +11,7 @@ import PrivateRoute from './PrivateRoute'
 import ForgotPassword from './Forgot';
 import { connectWithWebSocket } from './utils/wssConnection/wssConnection';
 import { useEffect } from 'react';
-import PeerCall from './PeerCall';
+
 
 function App() {
 
@@ -34,7 +34,7 @@ function App() {
          
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
-              <PrivateRoute path="/peer-to-peer" component={PeerCall}/>
+              
               <Route path="/forgot-password" component={ForgotPassword} /> 
             </Switch>
           </AuthProvider>
