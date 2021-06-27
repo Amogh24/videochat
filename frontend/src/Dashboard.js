@@ -3,8 +3,10 @@ import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "./AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import './Dashboard.css'
 
-export default function Dashboard({username}) {
+import { Container,Row,Col } from "react-bootstrap";
+export default function Dashboard() {
    
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
@@ -23,20 +25,46 @@ export default function Dashboard({username}) {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4">Profile</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <strong>Email:</strong> {currentUser.email}
-          <br/><br/>
+    <div className='dashboard_container background_main_color'>
+      <div className='dashboard_left_section'>
+        <div className='dashboard_content_container'>
+            content
+        </div>
+        <div className='dashboard_rooms_container background_secondary_color'>
+            rooms
+        </div>
+      </div>
+      <div className='dashboard_right_section background_secondary_color'>
+        <div className='dashboard_active_users_list'>
+          users
+        </div>
+       
+      </div>
+    </div>
+{/*      
+        <Container style={{color:"black",height:"100%",width:"100%"}}>
+           <Row xl={12}>
+             <Col>
+           <Card style={{textAlign:"center",width:"100px"}}>
+              <Card.Body>Rooms</Card.Body>
+               </Card>
+              </Col>
+               <Col>
+            <Card style={{textAlign:"center"}}>
+               <Card.Body>Content</Card.Body>
+               </Card>
+               </Col>
+               <Col>
+             <Card style={{textAlign:"center"}}>
+               <Card.Body>Active Users</Card.Body>
+               </Card>
+               </Col> */}
+            
 
-          {/* <Link to="/update-profile" className="btn btn-dark w-100 mt-3">
-            Update Profile
-          </Link> */}
-        </Card.Body>
-      </Card>
+        {/* </Row> */}
+        {/* </Container> */}
       <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
+        <Button style={{marginBottom:"10px",marginTop:"80%"}}variant="link" onClick={handleLogout}>
           Log Out
         </Button>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button,Card,Alert } from 'react-bootstrap'
+import { Form, Button,Card,Alert,Container } from 'react-bootstrap'
 import { useRef,useState } from 'react'
 import { useAuth } from "./AuthContext"
 import { Link ,useHistory} from 'react-router-dom'
@@ -39,8 +39,9 @@ const Login =  function ({saveUsername}){
     }
 
     return(
-        <div>
-          <h1 style={{color:"white",width:"400px",marginBottom:"10px"}}> VideoChat</h1>
+        <div style={{justifyContent:"center",alignItems:"center",marginTop:"10vh",maxWidth:"400px",height:"90vh",marginLeft:"auto",marginRight:"auto"}}>
+        
+          <h1 style={{color:"white",width:"400px",marginBottom:"10px",textAlign:"center" }}> VideoChat</h1>
         <Card style={{height:"65%",padding:"20px",paddingBottom:"30px"}}>
         <h2 className="text-center mb-4 mt-10">Login</h2>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -61,7 +62,7 @@ const Login =  function ({saveUsername}){
             <Button disabled ={loading} className = "w-100" type="submit" style={{marginTop:"10px",marginBottom:"10px",backgroundColor:"black"
           }}>Log in</Button>
           </Form>
-          <div style={{marginTop:"10px"}}>
+          <div style={{marginTop:"10px",textAlign:"center"}}>
           <Link to="/forgot-password">Forgot Password?</Link>
         </div>
         </Card>
@@ -69,6 +70,7 @@ const Login =  function ({saveUsername}){
         <div className="w-100 text-center mt-10" style={{color:"white",marginTop:"10px"}}>
         Need an account? <Link to="/signup" >Sign up</Link> 
       </div>
+    
     </div>
     )
 }

@@ -33,7 +33,7 @@ export default function Signup(){
     }
 
     return(
-        <div>
+        <div style={{justifyContent:"center",alignItems:"center",marginTop:"10vh",maxWidth:"400px",height:"90vh",marginLeft:"auto",marginRight:"auto"}}>
         <Card style={{height:"65%",padding:"20px",paddingBottom:"30px"}}>
         <h2 className="text-center mb-4 mt-10">Sign Up</h2>
         {error && <Alert variant="danger">{error}</Alert>}
