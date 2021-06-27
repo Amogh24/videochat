@@ -38,7 +38,11 @@ export default function Dashboard() {
         <div className='dashboard_active_users_list'>
           users
         </div>
-       
+        <div className='dashboard_logo_container'>
+        <Button  variant="link" onClick={handleLogout}>
+          Log Out
+        </Button>
+        </div>
       </div>
     </div>
 {/*      
@@ -63,10 +67,8 @@ export default function Dashboard() {
 
         {/* </Row> */}
         {/* </Container> */}
-      <div className="w-100 text-center mt-2">
-        <Button style={{marginBottom:"10px",marginTop:"80%"}}variant="link" onClick={handleLogout}>
-          Log Out
-        </Button>
+      <div style={{textAlign:"center",justifyContent:"center",width:"10%"}}>
+       
       </div>
     </>
   )
