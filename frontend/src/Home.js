@@ -3,7 +3,7 @@ import { AuthProvider } from "./AuthContext"
 import { Container } from "react-bootstrap"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from './Login';
-import Dashboard from './Dashboard'
+import Dashboard from './Dashboard/Dashboard'
 import PrivateRoute from './PrivateRoute'
 import ForgotPassword from './Forgot';
 

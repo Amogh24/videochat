@@ -1,9 +1,10 @@
 
 import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
-import { useAuth } from "./AuthContext"
+import { useAuth } from "../AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import './Dashboard.css'
+import ActiveUsersList from '../Users';
 
 import { Container,Row,Col } from "react-bootstrap";
 export default function Dashboard() {
@@ -36,7 +37,7 @@ export default function Dashboard() {
       </div>
       <div className='dashboard_right_section background_secondary_color'>
         <div className='dashboard_active_users_list'>
-          users
+          <ActiveUsersList/>
         </div>
         <div className='dashboard_logo_container'>
         <Button  variant="link" onClick={handleLogout}>
