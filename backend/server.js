@@ -17,7 +17,7 @@ const io = socket(server, {
   }
 });
 
-const peers = []  //list of users
+let peers = []  //list of users
 const broadcastEvents ={
   ACTIVE_USERS: 'ACTIVE_USERS',
   GROUP_CALL_ROOMS:'GROUP_CALL_ROOMS'
@@ -36,8 +36,19 @@ io.on('connection', (socket) => {
     })
     console.log(peers)
     io.sockets.emit('broadcast',{
-      event:broadcastEvents.ACTIVE_USERS,    //since we will broadcast different types of events,hence it is necessary to specify which type
-      activeUsers:peers
+      event:broadcastEvents.ACTIVE_USERS,    //since I will broadcast different types of events,hence it is necessary to specify which type
+      activeUsers:peers // sending list of active users to all users
     })
   })
+  socket.on('disconnect',()=>{
+    console.log('user disconnected');
+    peers = peers.filter(peer =>peer.socketId!==socket.id)
+    io.sockets.emit('broadcast',{
+      event:broadcastEvents.ACTIVE_USERS,    //since I will broadcast different types of events,hence it is necessary to specify which type
+      activeUsers:peers // sending list of active users to all users
+    })
+  });
 });
+
+
+

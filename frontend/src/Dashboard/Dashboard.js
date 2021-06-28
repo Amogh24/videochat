@@ -1,4 +1,4 @@
-
+import { disconnectUser } from "../utils/wssConnection/wssConnection"
 import React, { useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../AuthContext"
@@ -7,6 +7,7 @@ import './Dashboard.css'
 import ActiveUsersList from '../Users';
 
 import { Container,Row,Col } from "react-bootstrap";
+import { Socket } from "socket.io-client"
 export default function Dashboard() {
    
     const [error, setError] = useState("")
@@ -18,6 +19,7 @@ export default function Dashboard() {
 
     try {
       await logout()
+      disconnectUser();
       history.push("/login")
     } catch {
       setError("Failed to log out")

@@ -27,6 +27,10 @@ export const registerNewUser = (username)=>{
     })
 }
 
+export const disconnectUser = ()=>{
+    socket.disconnect()
+}
+
 const handleBroadCastEvents = (data)=>{
     switch(data.event){
         case broadcastEvents.ACTIVE_USERS:
