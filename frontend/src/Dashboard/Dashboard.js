@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom"
 import './Dashboard.css'
 import ActiveUsersList from '../Users';
 import * as webRTCHandler from '../utils/Webrtc/WebrtcHandler'
+import DirectCall from './DirectCall/DirectCall'
 
 import { Container,Row,Col } from "react-bootstrap";
 import { Socket } from "socket.io-client"
@@ -34,7 +35,7 @@ export default function Dashboard() {
     <div className='dashboard_container background_main_color'>
       <div className='dashboard_left_section'>
         <div className='dashboard_content_container'>
-            content
+            <DirectCall/>
         </div>
         <div className='dashboard_rooms_container background_secondary_color'>
             rooms

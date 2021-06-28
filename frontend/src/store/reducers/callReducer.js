@@ -1,7 +1,7 @@
 import * as callActions from '../actions/callActions';
 
 const initState = {
-  localstream:null
+  localStream:null
 };
 
 const reducer = (state = initState, action) => {
@@ -9,7 +9,7 @@ const reducer = (state = initState, action) => {
     case callActions.CALL_SET_LOCAL_STREAM:
       return {
         ...state,
-        localstream:action.localStream
+        localStream:action.localStream
       };
       
     default:
