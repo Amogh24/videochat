@@ -5,6 +5,7 @@ import { useAuth } from "./AuthContext"
 import { Link ,useHistory} from 'react-router-dom'
 import { connect } from 'react-redux';
 import { setUsername } from './store/actions/dashboardActions';
+import { registerNewUser } from './utils/wssConnection/wssConnection'
 
 const Login =  function ({saveUsername}){
  
@@ -29,6 +30,7 @@ const Login =  function ({saveUsername}){
         await login(emailRef.current.value, passwordRef.current.value)
         setLoading(false)
         saveUsername(usernameRef.current.value);
+        registerNewUser(usernameRef.current.value)
          history.push("/")
       } catch {
         setLoading(false)
