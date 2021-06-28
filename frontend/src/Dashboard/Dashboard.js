@@ -1,15 +1,18 @@
 import { disconnectUser } from "../utils/wssConnection/wssConnection"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import './Dashboard.css'
 import ActiveUsersList from '../Users';
+import * as webRTCHandler from '../utils/Webrtc/WebrtcHandler'
 
 import { Container,Row,Col } from "react-bootstrap";
 import { Socket } from "socket.io-client"
 export default function Dashboard() {
-   
+   useEffect(()=>{
+     webRTCHandler.getLocalStream()
+   },[])
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
      const history = useHistory()
@@ -19,7 +22,7 @@ export default function Dashboard() {
 
     try {
       await logout()
-      disconnectUser();
+      disconnectUser(); //function to disconnect user from server
       history.push("/login")
     } catch {
       setError("Failed to log out")

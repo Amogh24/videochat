@@ -42,9 +42,9 @@ io.on('connection', (socket) => {
   })
   socket.on('disconnect',()=>{
     console.log('user disconnected');
-    peers = peers.filter(peer =>peer.socketId!==socket.id)
-    io.sockets.emit('broadcast',{
-      event:broadcastEvents.ACTIVE_USERS,    //since I will broadcast different types of events,hence it is necessary to specify which type
+    peers = peers.filter(peer =>peer.socketId!==socket.id) //removing disconnected user from peers
+    io.sockets.emit('broadcast',{        //emitting new list of peers to clients
+      event:broadcastEvents.ACTIVE_USERS,
       activeUsers:peers // sending list of active users to all users
     })
   });
