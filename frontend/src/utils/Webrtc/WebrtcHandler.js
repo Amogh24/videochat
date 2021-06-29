@@ -19,7 +19,7 @@ export const getLocalStream = ()=>{
 let userId;
 
 export const callToOtherUser = (calleeDetails) =>{
-    userId = calleeDetails.socketId
+    userId = calleeDetails.socketId   //caller stores id of callee
     store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
     store.dispatch(setCallingDialogVisible(true))
     wss.sendPreOffer({
@@ -31,7 +31,7 @@ export const callToOtherUser = (calleeDetails) =>{
 }
 
 export const handlePreOffer = (data)=>{
-    userId = data.callerSocketId
+    userId = data.callerSocketId //callee stores id of caller
     store.dispatch(setCallerUsername(data.callerUsername))
     store.dispatch(setCallState(callStates.CALL_REQUESTED))
 }

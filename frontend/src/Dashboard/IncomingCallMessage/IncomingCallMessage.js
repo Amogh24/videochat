@@ -13,7 +13,7 @@ const IncomingCallMessage = (props) => {
 
   return (
     <div className='direct_call_dialog background_secondary_color'>
-      <span className='direct_call_dialog_caller_name'>{props.callerUsername}</span>
+      <span className='direct_call_dialog_caller_name'>Call from {props.callerUsername}</span>
       <div className='direct_call_dialog_button_container'>
         <button className='direct_call_dialog_accept_button' onClick={handleAcceptButtonPressed}>
           Accept

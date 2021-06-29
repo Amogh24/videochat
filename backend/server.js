@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
   });
 
   //listeners for direct calls
-  socket.on('preoffer',(data)=>{
+  socket.on('preoffer',(data)=>{          //this function relays info from one user to the other
     console.log("pre-offer handled")
     io.to(data.callee.socketId).emit('preoffer',{
       callerUsername:data.caller.username,
