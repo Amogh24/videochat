@@ -2,7 +2,7 @@ import React from 'react';
 
 import './IncomingCallMessage.css';
 
-const IncomingCallMessage = () => {
+const IncomingCallMessage = (props) => {
   const handleAcceptButtonPressed = () => {
     // accept the call
   };
@@ -13,7 +13,7 @@ const IncomingCallMessage = () => {
 
   return (
     <div className='direct_call_dialog background_secondary_color'>
-      <span className='direct_call_dialog_caller_name'>Caller</span>
+      <span className='direct_call_dialog_caller_name'>{props.callerUsername}</span>
       <div className='direct_call_dialog_button_container'>
         <button className='direct_call_dialog_accept_button' onClick={handleAcceptButtonPressed}>
           Accept

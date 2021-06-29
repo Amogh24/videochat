@@ -48,6 +48,15 @@ io.on('connection', (socket) => {
       activeUsers:peers // sending list of active users to all users
     })
   });
+
+  //listeners for direct calls
+  socket.on('preoffer',(data)=>{
+    console.log("pre-offer handled")
+    io.to(data.callee.socketId).emit('preoffer',{
+      callerUsername:data.caller.username,
+      callerSocketId:socket.id
+    })
+  })
 });
 
 

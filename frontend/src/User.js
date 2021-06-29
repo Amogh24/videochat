@@ -1,11 +1,13 @@
 import React from 'react';
 import userAvatar from './icon.jpg';
+import { callToOtherUser } from './utils/Webrtc/WebrtcHandler';
 
 const ActiveUsersListItem = (props) => {
   const { activeUser } = props;
 
   const handleListItemPressed = () => {
     // call to other user
+    callToOtherUser(activeUser)
   };
 
   console.log(activeUser);

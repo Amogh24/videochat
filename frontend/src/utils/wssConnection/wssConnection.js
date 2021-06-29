@@ -1,6 +1,7 @@
 import socketClient from 'socket.io-client'
 import store from '../../store/store';
 import * as dashboardActions from '../../store/actions/dashboardActions'
+import * as webRTChandler from '../Webrtc/WebrtcHandler'
 const SERVER = 'http://localhost:5000'
 
 let socket;
@@ -19,7 +20,12 @@ export const connectWithWebSocket = () =>{
     socket.on('broadcast',(data)=>{  //listener for events that are broadcasted from the server
         handleBroadCastEvents(data)
     })
+    //listeners for direct calls
+    socket.on('preoffer',(data)=>{
+        webRTChandler.handlePreOffer(data)
+    })
 }
+
 export const registerNewUser = (username)=>{
     socket.emit('register-new-user',{        //sending info of new user to server
         username:username,
@@ -31,6 +37,9 @@ export const disconnectUser = ()=>{
     socket.disconnect()
 }
 
+export const sendPreOffer = (data)=>{
+    socket.emit('preoffer',data)
+}
 const handleBroadCastEvents = (data)=>{
     switch(data.event){
         case broadcastEvents.ACTIVE_USERS:
