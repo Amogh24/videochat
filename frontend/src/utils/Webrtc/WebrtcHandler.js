@@ -6,6 +6,12 @@ const constraints = {
     audio:true
 };
 
+const preOfferAnswers = {
+    CALL_ACCEPTED:'CALL_ACCEPTED',
+    CALL_REJECTED:'CALL REJECTED',
+    CALL_NOT_AVAILABLE:'CALL_NOT_AVAILABLE'
+}
+
 export const getLocalStream = ()=>{
     navigator.mediaDevices.getUserMedia(constraints).then(stream=>{
         store.dispatch(setLocalStream(stream))
@@ -31,7 +37,44 @@ export const callToOtherUser = (calleeDetails) =>{
 }
 
 export const handlePreOffer = (data)=>{
-    userId = data.callerSocketId //callee stores id of caller
-    store.dispatch(setCallerUsername(data.callerUsername))
-    store.dispatch(setCallState(callStates.CALL_REQUESTED))
+    if(checkCallPossibility)
+    {
+        userId = data.callerSocketId //callee stores id of caller
+        store.dispatch(setCallerUsername(data.callerUsername))
+        store.dispatch(setCallState(callStates.CALL_REQUESTED))
+    } else{
+        wss.sendPreOfferAnswer({
+            callerSocketId:data.callerSocketId,
+            answer:preOfferAnswers.CALL_NOT_AVAILABLE
+        })
+    }
+   
+}
+
+export const acceptIncomingCall = ()=>{
+    wss.sendPreOfferAnswer({
+        callerSocketId:userId,
+        answer:preOfferAnswers.CALL_ACCEPTED
+    })
+}
+
+export const rejectIncomingCall = ()=>{
+    
+    wss.sendPreOfferAnswer({
+        callerSocketId:userId,
+        answer:preOfferAnswers.CALL_REJECTED
+    })
+    resetCallData()
+}
+
+export const resetCallData = ()=>{
+    userId = null;
+    store.dispatch(setCallState(callStates.CALL_AVAILABLE))
+}
+
+export const checkCallPossibility = ()=>{
+if(store.getState().call.localStream === null || store.getState().call.callState!==callStates.CALL_AVAILABLE){
+    return false
+}
+else return true;
 }

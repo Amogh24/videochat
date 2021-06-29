@@ -26,6 +26,10 @@ export const connectWithWebSocket = () =>{
     })
 }
 
+export const sendPreOfferAnswer = (data)=>{
+    socket.emit('preofferanswer',data)
+}
+
 export const registerNewUser = (username)=>{
     socket.emit('register-new-user',{        //sending info of new user to server
         username:username,
