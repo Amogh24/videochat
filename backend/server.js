@@ -57,6 +57,12 @@ io.on('connection', (socket) => {
       callerSocketId:socket.id
     })
   })
+  socket.on('preofferanswer',(data)=>{
+    console.log("handling the preoffer answer");
+    io.to(data.callerSocketId).emit('preofferanswer',{
+      answer:data.answer
+    })
+  })
 });
 
 

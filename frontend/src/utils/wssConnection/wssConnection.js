@@ -24,6 +24,9 @@ export const connectWithWebSocket = () =>{
     socket.on('preoffer',(data)=>{
         webRTChandler.handlePreOffer(data)
     })
+    socket.on('preofferanswer',(data)=>{
+        webRTChandler.handlePreOfferAnswer(data)
+    })
 }
 
 export const sendPreOfferAnswer = (data)=>{

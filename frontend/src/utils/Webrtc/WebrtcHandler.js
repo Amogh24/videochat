@@ -72,6 +72,20 @@ export const resetCallData = ()=>{
     store.dispatch(setCallState(callStates.CALL_AVAILABLE))
 }
 
+export const handlePreOfferAnswer=(data)=>{
+    if(data.answer === preOfferAnswers.CALL_ACCEPTED){
+        //send webrtc offer
+    }else{
+        let rejectionMessage;
+        if(data.answer === preOfferAnswers.CALL_NOT_AVAILABLE){
+            rejectionMessage = 'The user you are calling is unable to pick the call right now'
+        }else{
+            rejectionMessage = 'Call was rejected by the other user'
+        }
+    }
+    
+}
+
 export const checkCallPossibility = ()=>{
 if(store.getState().call.localStream === null || store.getState().call.callState!==callStates.CALL_AVAILABLE){
     return false
