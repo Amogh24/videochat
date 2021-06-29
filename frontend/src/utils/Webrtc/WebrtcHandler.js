@@ -1,4 +1,4 @@
-import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername } from "../../store/actions/callActions"
+import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected } from "../../store/actions/callActions"
 import store from '../../store/store';
 import * as wss from '../wssConnection/wssConnection'
 const constraints = {
@@ -73,6 +73,8 @@ export const resetCallData = ()=>{
 }
 
 export const handlePreOfferAnswer=(data)=>{
+
+    store.dispatch(setCallingDialogVisible(false))
     if(data.answer === preOfferAnswers.CALL_ACCEPTED){
         //send webrtc offer
     }else{
@@ -82,6 +84,10 @@ export const handlePreOfferAnswer=(data)=>{
         }else{
             rejectionMessage = 'Call was rejected by the other user'
         }
+        store.dispatch(setCallRejected({
+            rejected:true,
+            reason:rejectionMessage
+        }))
     }
     
 }
