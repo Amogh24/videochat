@@ -9,6 +9,5 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    background: rgb(134, 172, 207);
-    color:black
+    font-size: larger;
   }

@@ -27,6 +27,9 @@ export const connectWithWebSocket = () =>{
     socket.on('preofferanswer',(data)=>{
         webRTChandler.handlePreOfferAnswer(data)
     })
+    socket.on('webRTC-offer',(data)=>{
+        webRTChandler.handleOffer(data);
+    })
 }
 
 export const sendPreOfferAnswer = (data)=>{
@@ -45,8 +48,15 @@ export const disconnectUser = ()=>{
 }
 
 export const sendPreOffer = (data)=>{
-    socket.emit('preoffer',data)
+    socket.emit('preoffer',data)              //sending the pre offer to signalling server
 }
+
+export const sendWebRTCOffer = (data)=>{
+    socket.emit('webRTC-offer',data)             //sending sdp to signalling server
+}
+export const sendWebRTCAnswer = (data)=>{
+    socket.emit('webRTC-answer',data)             //sending answer to signalling server
+ }
 const handleBroadCastEvents = (data)=>{
     switch(data.event){
         case broadcastEvents.ACTIVE_USERS:

@@ -16,6 +16,7 @@ export const getLocalStream = ()=>{
     navigator.mediaDevices.getUserMedia(constraints).then(stream=>{
         store.dispatch(setLocalStream(stream))
         store.dispatch(setCallState(callStates.CALL_AVAILABLE))
+        createPeerConnection()
     })
     .catch(err=>{
         console.log("couldn't get access to local stream")
@@ -23,6 +24,28 @@ export const getLocalStream = ()=>{
     })
 }
 let userId;
+let peerConnection;
+const configuration = {
+    iceServers:[{
+        urls:'stun:stun.l.google.com:13902'
+    }]
+}
+const createPeerConnection = ()=>{
+    peerConnection = new RTCPeerConnection(configuration)
+    const localStream = store.getState().call.localStream;
+    for (const track of localStream.getTrack()){
+        peerConnection.addTrack(track,localStream)
+    }
+
+    peerConnection.ontrack=({streams:[stream]})=>{
+        //dispatch
+    }
+    peerConnection.onicecandidate = (event)=>{
+        //send ice candidates to peer
+    };
+
+}
+
 
 export const callToOtherUser = (calleeDetails) =>{
     userId = calleeDetails.socketId   //caller stores id of callee
@@ -77,6 +100,7 @@ export const handlePreOfferAnswer=(data)=>{
     store.dispatch(setCallingDialogVisible(false))
     if(data.answer === preOfferAnswers.CALL_ACCEPTED){
         //send webrtc offer
+        sendOffer()
     }else{
         let rejectionMessage;
         if(data.answer === preOfferAnswers.CALL_NOT_AVAILABLE){
@@ -88,8 +112,31 @@ export const handlePreOfferAnswer=(data)=>{
             rejected:true,
             reason:rejectionMessage
         }))
+        resetCallData();
     }
     
+}
+
+const sendOffer = async() =>{
+    const offer = await peerConnection.createOffer()
+    peerConnection.setLocalDescription(offer)
+    wss.sendWebRTCOffer({
+        calleeSocketId:userId,
+        offer:offer
+    })
+}
+
+const handleOffer = async()=>{
+    await peerConnection.setRemoteDescription(data.offer);//the offer sent by caller will be remote description for the callee
+    const answer = await peerConnection.createAnswer();
+    await peerConnection.setLocalDescription(answer)  //the answer created to the offer will be local description for the callee
+    wss.sendWebRTCAnswer({
+        callerSocketId:userId,
+        answer: answer
+    })
+}
+const handleAnswer = async()=>{
+
 }
 
 export const checkCallPossibility = ()=>{
