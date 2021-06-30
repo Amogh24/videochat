@@ -30,6 +30,9 @@ export const connectWithWebSocket = () =>{
     socket.on('webRTC-offer',(data)=>{
         webRTChandler.handleOffer(data);
     })
+    socket.on('webRTC-answer',(data)=>[
+        webRTChandler.handleAnswer(data)
+    ])
 }
 
 export const sendPreOfferAnswer = (data)=>{

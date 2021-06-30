@@ -126,7 +126,7 @@ const sendOffer = async() =>{
     })
 }
 
-const handleOffer = async()=>{
+export const handleOffer = async(data)=>{
     await peerConnection.setRemoteDescription(data.offer);//the offer sent by caller will be remote description for the callee
     const answer = await peerConnection.createAnswer();
     await peerConnection.setLocalDescription(answer)  //the answer created to the offer will be local description for the callee
@@ -135,8 +135,8 @@ const handleOffer = async()=>{
         answer: answer
     })
 }
-const handleAnswer = async()=>{
-
+export const handleAnswer = async(data)=>{
+await peerConnection.setRemoteDescription(data.answer)
 }
 
 export const checkCallPossibility = ()=>{

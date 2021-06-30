@@ -64,9 +64,15 @@ io.on('connection', (socket) => {
     })
   })
   socket.on('webRTC-offer',(data)=>{
-    console.log("sending offer to remote peer");
+    console.log("sending offer to remote peer");//relaying offer to remote peer 
     io.to(data.calleeSocketId).emit('webRTC-offer',{
      offer:data.offer
+    })
+  })
+  socket.on('webRTC-answer',(data)=>{
+    console.log("sending answer to user");
+    io.to(data.callerSocketId).emit('webRTC-answer',{
+      answer:data.answer
     })
   })
 });
