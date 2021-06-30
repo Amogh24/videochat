@@ -42,6 +42,12 @@ const createPeerConnection = ()=>{
     }
     peerConnection.onicecandidate = (event)=>{
         //send ice candidates to peer
+        if(event.candidate){
+            wss.sendWebRTCCandidate({
+                candidate:event.candidate,
+                userId:userId
+            })
+        }
     };
 
 }
@@ -136,7 +142,15 @@ export const handleOffer = async(data)=>{
     })
 }
 export const handleAnswer = async(data)=>{
-await peerConnection.setRemoteDescription(data.answer)
+    await peerConnection.setRemoteDescription(data.answer) //the answer created by callee is remote description for caller
+}
+
+export const handleCandidate = async(data)=>{
+    try{
+        await peerConnection.addIceCandidate(data.candidate)
+    }catch(err){
+        console.error('error occured when trying to add received candidate',err)
+    }
 }
 
 export const checkCallPossibility = ()=>{

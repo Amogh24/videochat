@@ -30,9 +30,12 @@ export const connectWithWebSocket = () =>{
     socket.on('webRTC-offer',(data)=>{
         webRTChandler.handleOffer(data);
     })
-    socket.on('webRTC-answer',(data)=>[
+    socket.on('webRTC-answer',(data)=>{
         webRTChandler.handleAnswer(data)
-    ])
+    })
+    socket.on('webRTC-candidate',(data)=>{
+        webRTChandler.handleCandidate(data)
+    })
 }
 
 export const sendPreOfferAnswer = (data)=>{
@@ -59,7 +62,10 @@ export const sendWebRTCOffer = (data)=>{
 }
 export const sendWebRTCAnswer = (data)=>{
     socket.emit('webRTC-answer',data)             //sending answer to signalling server
- }
+}
+export const sendWebRTCCandidate = (data)=>{
+    socket.emit('webRTC-candidate',data)          //sending ice candidates to server
+}
 const handleBroadCastEvents = (data)=>{
     switch(data.event){
         case broadcastEvents.ACTIVE_USERS:

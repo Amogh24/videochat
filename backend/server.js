@@ -70,9 +70,15 @@ io.on('connection', (socket) => {
     })
   })
   socket.on('webRTC-answer',(data)=>{
-    console.log("sending answer to user");
-    io.to(data.callerSocketId).emit('webRTC-answer',{
+    console.log("sending answer to peer"); 
+    io.to(data.callerSocketId).emit('webRTC-answer',{     //relaying answer to caller
       answer:data.answer
+    })
+  })
+  socket.on('webRTC-candidate',(data)=>{
+    console.log("sending ice candidates to peer");
+    io.to(data.userId).emit('webRTC-candidate',{         //relaying ice candidates to peer
+      candidate:data.candidate
     })
   })
 });
