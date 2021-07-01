@@ -1,4 +1,4 @@
-import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected } from "../../store/actions/callActions"
+import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream } from "../../store/actions/callActions"
 import store from '../../store/store';
 import * as wss from '../wssConnection/wssConnection'
 const constraints = {
@@ -39,6 +39,7 @@ const createPeerConnection = ()=>{
 
     peerConnection.ontrack=({streams:[stream]})=>{
         //dispatch
+        store.dispatch(setRemoteStream(stream))
     }
     peerConnection.onicecandidate = (event)=>{
         //send ice candidates to peer
@@ -91,6 +92,8 @@ export const acceptIncomingCall = ()=>{
         callerSocketId:userId,
         answer:preOfferAnswers.CALL_ACCEPTED
     })
+    store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
+
 }
 
 export const rejectIncomingCall = ()=>{

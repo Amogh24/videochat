@@ -2,12 +2,20 @@ import React, { useRef, useEffect } from 'react';
 
 const styles = {
   videoContainer: {
-    width: '100%',
-    height: '100%'
+    width: '400px',
+    height: '60%',
+    backgroundColor:'white',
+    borderRadius:'8px',
+    alignItems:'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    position:'absolute'
+    
   },
   videoElement: {
     width: '100%',
-    height: '100%'
+    height: '90%'
   }
 };
 

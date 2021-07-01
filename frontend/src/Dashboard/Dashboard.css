@@ -2,17 +2,18 @@
     width: 100%;
     height: 100vh;
     display: flex;
+
   }
   
   .dashboard_left_section {
-    width: 80% !important;
-    height: 100% !important;
-    display: flex !important;
-    margin-right: 90%;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    align-content: flex-start !important;
+    width: 80%;
+    
+    display: flex;
+    margin-right: 70%;
+    flex-direction: column ;
+    
     color: white;
+    border-radius: 8px;
   }
   
   .dashboard_right_section {
@@ -24,10 +25,15 @@
   }
   
   .dashboard_content_container {
-    width: 100%;
-    height: 80%;
+    width: 80%;
+    height:80vh;
     display: flex;
+    margin-left: 100%;
+    flex-direction: column;
+    align-content: center;
+    align-tracks: center;
     align-items: center;
+    justify-content: center;
   }
   
   .dashboard_rooms_container {
