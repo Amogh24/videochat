@@ -33,7 +33,7 @@ const configuration = {
 const createPeerConnection = ()=>{
     peerConnection = new RTCPeerConnection(configuration)
     const localStream = store.getState().call.localStream;
-    for (const track of localStream.getTrack()){
+    for (const track of localStream.getTracks()){
         peerConnection.addTrack(track,localStream)
     }
 
@@ -42,6 +42,7 @@ const createPeerConnection = ()=>{
     }
     peerConnection.onicecandidate = (event)=>{
         //send ice candidates to peer
+        console.log("getting ice candidates from stun server")
         if(event.candidate){
             wss.sendWebRTCCandidate({
                 candidate:event.candidate,
@@ -49,6 +50,11 @@ const createPeerConnection = ()=>{
             })
         }
     };
+    peerConnection.onconnectionstatechange = (event)=>{
+        if(peerConnection.connectionState === 'connected'){
+            console.log("successfully connected with peer")
+        }
+    }
 
 }
 
@@ -147,6 +153,7 @@ export const handleAnswer = async(data)=>{
 
 export const handleCandidate = async(data)=>{
     try{
+        console.log("adding ice candidates")
         await peerConnection.addIceCandidate(data.candidate)
     }catch(err){
         console.error('error occured when trying to add received candidate',err)
