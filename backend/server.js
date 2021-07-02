@@ -81,6 +81,10 @@ io.on('connection', (socket) => {
       candidate:data.candidate
     })
   })
+  socket.on('user-hanged-up',(data)=>{
+    console.log("informing peer that other user has hanged up");
+    io.to(data.userId).emit('user-hanged-up')
+  })
 });
 
 

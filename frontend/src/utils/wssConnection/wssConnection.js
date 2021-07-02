@@ -36,6 +36,9 @@ export const connectWithWebSocket = () =>{
     socket.on('webRTC-candidate',(data)=>{
         webRTChandler.handleCandidate(data)
     })
+    socket.on('user-hanged-up',(data)=>{
+        webRTChandler.handleUserHangUp(data)
+    })
 }
 
 export const sendPreOfferAnswer = (data)=>{
@@ -65,6 +68,10 @@ export const sendWebRTCAnswer = (data)=>{
 }
 export const sendWebRTCCandidate = (data)=>{
     socket.emit('webRTC-candidate',data)          //sending ice candidates to server
+}
+
+export const sendUserHangedUp = (data)=>{
+    socket.emit('user-hanged-up',data);
 }
 const handleBroadCastEvents = (data)=>{
     switch(data.event){

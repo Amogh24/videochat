@@ -192,7 +192,30 @@ export const switchForScreenSharingStream = async()=>{
         sender.replaceTrack(localStream.getVideoTracks()[0]);  //replacing shared screen with video
         store.dispatch(setScreenSharingActive(false));
         screenSharingStream.getTracks().forEach(track=>track.stop());
+    } 
+}
+
+export const handleUserHangUp = ()=>{
+    resetCallDataAfterHangUp()
+}
+
+export const hangUp = ()=>{
+    wss.sendUserHangedUp({
+        userId:userId
+    })
+    resetCallDataAfterHangUp();
+}
+
+const resetCallDataAfterHangUp = () =>{
+    store.dispatch(setRemoteStream(null));
+    peerConnection.close();
+    peerConnection = null;
+    createPeerConnection();
+    resetCallData();
+
+    if(store.getState().call.screenSharingActive){
+        screenSharingStream.getTracks().forEach(track=>{
+            track.stop();
+        })
     }
-    
-    
 }
