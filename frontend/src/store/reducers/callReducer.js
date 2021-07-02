@@ -11,7 +11,8 @@ const initState = {
   },
   remoteStream:null,
   localCamEnabled:true,
-  localMicEnabled:true
+  localMicEnabled:true,
+  screenSharingActive:false
 };
 
 const reducer = (state = initState, action) => {
@@ -56,6 +57,11 @@ const reducer = (state = initState, action) => {
               ...state,
               localMicEnabled:action.enabled
             }
+          case callActions.CALL_SET_SCREEN_SHARING_ACTIVE:
+            return{
+              ...state,
+              screenSharingActive:action.active
+            } 
 
     default:
       return state;

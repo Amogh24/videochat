@@ -13,6 +13,7 @@ export const CALL_SET_CALL_REJECTED = 'CALL.SET_CALL_REJECTED'
 export const CALL_SET_REMOTE_STREAM = 'CALL.SET_REMOTE_STREAM'
 export const CALL_SET_LOCAL_MIC_ENABLED = 'CALL.SET_LOCAL_MIC_ENABLED'
 export const CALL_SET_LOCAL_CAM_ENABLED = ' CALL.SET_LOCAL_CAM_ENABLED'
+export const CALL_SET_SCREEN_SHARING_ACTIVE = 'CALL.SET_SCREEN_SHARING_ACTIVE'
 
 export const setLocalStream = (localStream)=>{
     return{
@@ -65,5 +66,11 @@ export const setLocalCamEnabled = (enabled)=>{
     return{
         type:CALL_SET_LOCAL_CAM_ENABLED,
         enabled
+    }
+}
+export const setScreenSharingActive = (active)=>{
+    return{
+        type:CALL_SET_SCREEN_SHARING_ACTIVE,
+        active
     }
 }

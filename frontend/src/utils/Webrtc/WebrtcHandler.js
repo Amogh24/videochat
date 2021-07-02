@@ -1,4 +1,4 @@
-import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream } from "../../store/actions/callActions"
+import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive } from "../../store/actions/callActions"
 import store from '../../store/store';
 import * as wss from '../wssConnection/wssConnection'
 const constraints = {
@@ -154,7 +154,7 @@ export const handleAnswer = async(data)=>{
     await peerConnection.setRemoteDescription(data.answer) //the answer created by callee is remote description for caller
 }
 
-export const handleCandidate = async(data)=>{
+export const handleCandidate = async(data)=>{     //function to add ice candidates of peer
     try{
         console.log("adding ice candidates")
         await peerConnection.addIceCandidate(data.candidate)
@@ -163,9 +163,36 @@ export const handleCandidate = async(data)=>{
     }
 }
 
-export const checkCallPossibility = ()=>{
+export const checkCallPossibility = ()=>{     //function to check if peer is available for call or not
 if(store.getState().call.localStream === null || store.getState().call.callState!==callStates.CALL_AVAILABLE){
     return false
 }
 else return true;
+}
+
+let screenSharingStream;
+
+export const switchForScreenSharingStream = async()=>{
+    if(!store.getState().call.screenSharingActive){
+        try {
+        
+            screenSharingStream = await navigator.mediaDevices.getDisplayMedia({video:true});
+            store.dispatch(setScreenSharingActive(true));
+            const senders = peerConnection.getSenders();
+            const sender = senders.find(sender => sender.track.kind == screenSharingStream.getVideoTracks()[0].kind)  //this finds out which user is going to share screen
+            sender.replaceTrack(screenSharingStream.getVideoTracks()[0]);//we replace the video of the person who will share the screen with his screen 
+        
+    } catch (error) {
+        console.error("error occured while sharinng the screen",error)
+    }
+    }else{
+        const localStream = store.getState().call.localStream;
+        const senders = peerConnection.getSenders();
+        const sender = senders.find(sender => sender.track.kind == localStream.getVideoTracks()[0].kind) 
+        sender.replaceTrack(localStream.getVideoTracks()[0]);  //replacing shared screen with video
+        store.dispatch(setScreenSharingActive(false));
+        screenSharingStream.getTracks().forEach(track=>track.stop());
+    }
+    
+    
 }
