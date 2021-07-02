@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import ConversationButtons from '../Button/ConversationButtons';
 
 const styles = {
   videoContainer: {
@@ -10,12 +11,12 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    position:'absolute'
+    left:'150'
     
   },
   videoElement: {
     width: '100%',
-    height: '90%'
+    height: '100%'
   }
 };
 
@@ -37,6 +38,7 @@ const LocalVideoView = props => {
   return (
     <div style={styles.videoContainer}>
       <video style={styles.videoElement} ref={remoteVideoRef} autoPlay />
+      
     </div>
   );
 };

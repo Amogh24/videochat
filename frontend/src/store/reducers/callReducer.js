@@ -9,7 +9,9 @@ const initState = {
     rejected:false,
     reason:''
   },
-  remoteStream:null
+  remoteStream:null,
+  localCamEnabled:true,
+  localMicEnabled:true
 };
 
 const reducer = (state = initState, action) => {
@@ -43,6 +45,16 @@ const reducer = (state = initState, action) => {
             return{
              ...state,
              remoteStream:action.remoteStream
+            }
+          case callActions.CALL_SET_LOCAL_CAM_ENABLED:
+            return{
+              ...state,
+              localCamEnabled:action.enabled
+            }
+          case callActions.CALL_SET_LOCAL_MIC_ENABLED:
+            return{
+              ...state,
+              localMicEnabled:action.enabled
             }
 
     default:
