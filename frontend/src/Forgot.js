@@ -29,8 +29,8 @@ export default function ForgotPassword(){
     }
 
     return(
-        <div style={{justifyContent:"center",alignItems:"center",marginTop:"20vh",maxWidth:"400px",height:"80vh",marginLeft:"auto",marginRight:"auto"}}>
-        <Card style={{height:"55%",padding:"20px",paddingBottom:"30px"}}>
+        <div style={{justifyContent:"center",alignItems:"center",marginTop:"20vh",width:"20%",height:"80vh",marginLeft:"auto",marginRight:"auto"}}>
+        <Card style={{height:"45%",padding:"20px",paddingBottom:"30px"}}>
         <h2 className="text-center mb-4 mt-10">Reset Password</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         {message && <Alert variant="success">{message}</Alert>}
