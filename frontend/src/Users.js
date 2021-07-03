@@ -25,6 +25,8 @@ import './Users.css';
 const ActiveUsersList = ({activeUsers}) => {
   return (
     <div className='active_user_list_container'>
+      <h4>List of active users</h4>
+      <br/>
       {activeUsers.map((activeUser) =>
         <ActiveUsersListItem
           key={activeUser.socketId}

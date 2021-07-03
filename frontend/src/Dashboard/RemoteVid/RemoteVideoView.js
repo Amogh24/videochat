@@ -3,15 +3,15 @@ import ConversationButtons from '../Button/ConversationButtons';
 
 const styles = {
   videoContainer: {
-    width: '400px',
-    height: '60%',
+    width: '500px',
+    height: '70%',
     backgroundColor:'white',
     borderRadius:'8px',
     alignItems:'center',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    left:'150'
+    left:'100%'
     
   },
   videoElement: {

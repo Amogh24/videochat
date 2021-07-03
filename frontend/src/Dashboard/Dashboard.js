@@ -74,9 +74,9 @@ export default function Dashboard() {
 
         {/* </Row> */}
         {/* </Container> */}
-      <div style={{textAlign:"center",justifyContent:"center",width:"10%"}}>
+      {/* <div style={{textAlign:"center",justifyContent:"center",width:"10%"}}>
        
-      </div>
+      </div> */}
     </>
   )
 }

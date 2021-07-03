@@ -1,5 +1,5 @@
 .dashboard_container {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     display: flex;
 
@@ -17,7 +17,7 @@
   }
   
   .dashboard_right_section {
-    width: 10%;
+    width: 20%;
     height: 100%;
     align-items: right;
     align-content: flex-end !important;
@@ -30,10 +30,10 @@
     display: flex;
     margin-left: 100%;
     flex-direction: column;
-    align-content: center;
-    align-tracks: center;
-    align-items: center;
-    justify-content: center;
+    align-content: flex-end;
+    align-tracks: flex-end;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
   
   .dashboard_rooms_container {
