@@ -26,9 +26,11 @@ const CallingMessage = () => {
   return (
     <div className='direct_calling_dialog background_secondary_color'>
       <span><b>Calling</b></span>
+      <br/><br/>
       <div style={styles.buttonContainer} onClick={handleHangUpButtonPressed}>
         <MdCallEnd style={{ width: '20px', height: '20px', fill: '#e6e5e8' }} />   
       </div>
+      <p style={{color:"white"}}>End Call</p>
     </div>
   );
 };
