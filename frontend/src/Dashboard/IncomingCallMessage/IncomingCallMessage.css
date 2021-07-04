@@ -34,7 +34,7 @@
     width: 120px;
     transition: 0.3s;
     color: #e6e5e8;
-    background-color: #282C34;
+    background-color:rgb(36, 165, 36);
   }
   
   .direct_call_dialog_accept_button:hover {
@@ -52,7 +52,7 @@
     width: 120px;
     transition: 0.3s;
     color: #e6e5e8;
-    background-color: #282C34;
+    background-color:rgb(184, 17, 17);
   }
   
   .direct_call_dialog_reject_button:hover {
