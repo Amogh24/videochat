@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom"
 import './Dashboard.css'
 import ActiveUsersList from '../Users';
 import * as webRTCHandler from '../utils/Webrtc/WebrtcHandler'
+import * as webRTCGroupHandler from '../utils/Webrtc/webRTCGroupCallHandler'
 import DirectCall from './DirectCall/DirectCall'
 import { callStates } from "../store/actions/callActions"
 import { Socket } from "socket.io-client"
@@ -13,7 +14,8 @@ import DashboardInformation from "./DashboardInfo/DashboardInfo"
 import { connect } from "react-redux"
 const Dashboard=({username,callState})=> {
    useEffect(()=>{
-     webRTCHandler.getLocalStream()
+     webRTCHandler.getLocalStream();
+     webRTCGroupHandler.connectWithMyPeer();
    },[])
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
