@@ -15,22 +15,22 @@ const initState = {
   screenSharingActive:false
 };
 
-const reducer = (state = initState, action) => {
+const reducer = (state = initState, action) => {    //tbis basically changes the state  
   switch (action.type) {
     case callActions.CALL_SET_LOCAL_STREAM:
       return {
         ...state,
-        localStream:action.localStream
+        localStream:action.localStream     //used to display local stream once it is obtained
       };
       case callActions.CALL_SET_CALL_STATE:
         return{
           ...state,
-          callState:action.callState
+          callState:action.callState      //used to change the state of the call
         }
         case callActions.CALL_SET_CALLING_DIALOG_VISIBLE:
           return{
             ...state,
-            callingDialogVisible:action.visible
+            callingDialogVisible:action.visible   //used to show calling dialog when we call someone and hide it otherwise
           }
         case callActions.CALL_SET_CALLER_USERNAME:
           return{
@@ -61,7 +61,18 @@ const reducer = (state = initState, action) => {
             return{
               ...state,
               screenSharingActive:action.active
-            } 
+            }
+          case callActions.CALL_RESET_CALL_DATA:
+            return{
+              ...state,
+              remoteStream: null,
+              screenSharingActive:false,
+              callingDialogVisible:false,
+              callerUsername:'',
+              localMicEnabled:true,
+              localCamEnabled:true,
+
+            }
 
     default:
       return state;

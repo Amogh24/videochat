@@ -1,4 +1,4 @@
-import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive } from "../../store/actions/callActions"
+import { setCallState, setLocalStream,callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive, resetCallDataStateToDefault } from "../../store/actions/callActions"
 import store from '../../store/store';
 import * as wss from '../wssConnection/wssConnection'
 const constraints = {
@@ -207,15 +207,22 @@ export const hangUp = ()=>{
 }
 
 const resetCallDataAfterHangUp = () =>{
-    store.dispatch(setRemoteStream(null));
+
+    if(store.getState().call.screenSharingActive){          //in the case where screen sharing was active when call was ended, it will stop the screenshare 
+        screenSharingStream.getTracks().forEach(track=>{       
+            track.stop();   
+        })
+    }
+
+    store.dispatch(resetCallDataStateToDefault());
     peerConnection.close();
     peerConnection = null;
     createPeerConnection();
     resetCallData();
+    
+    const localStream = store.getState().call.localStream
+    localStream.getVideoTracks()[0].enabled = true;      //restarts the video after call is
+    localStream.getAudioTracks()[0].enabled = true;
 
-    if(store.getState().call.screenSharingActive){
-        screenSharingStream.getTracks().forEach(track=>{
-            track.stop();
-        })
-    }
+    
 }

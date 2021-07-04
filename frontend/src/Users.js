@@ -3,41 +3,26 @@ import ActiveUsersListItem from './User';
 import { connect } from 'react-redux';
 import './Users.css';
 
-// const activeUsers = [
-//   {
-//     socketId: 321,
-//     username: 'Akshat'
-//   },
-//   {
-//     socketId: 333,
-//     username: 'Aakash'
-//   },
-//   {
-//     socketId: 432,
-//     username: 'Amogh'
-//   },
-//   {
-//     socketId: 345,
-//     username: 'Aadi'
-//   }
-// ];
 
-const ActiveUsersList = ({activeUsers}) => {
+
+const ActiveUsersList = ({activeUsers,callState}) => {
   return (
     <div className='active_user_list_container'>
       <h4>List of active users</h4>
       <br/>
-      {activeUsers.map((activeUser) =>
+      {activeUsers.map((activeUser) =>              //renders the list of active users
         <ActiveUsersListItem
           key={activeUser.socketId}
           activeUser={activeUser}
+          callState={callState}
         />)}
     </div>
   );
 };
 
-const mapStateToProps = ({dashboard})=>({
-  ...dashboard
+const mapStateToProps = ({dashboard,call})=>({     //this allows the state stored in reducers to be mapped to props of the current component
+  ...dashboard,
+  ...call
 })
 
 export default connect(mapStateToProps) (ActiveUsersList);
