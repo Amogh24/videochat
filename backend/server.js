@@ -1,14 +1,26 @@
 const express = require('express');
-const socket = require('socket.io');
+const socket = require('socket.io'); //socket.io : signalling server for 1-1 call 
+const {ExpressPeerServer} = require('peer')//peerjs: signalling server for group call
+const groupCallHandler = require('./groupCallHandler')
 
 const PORT = 5000;
 
 const app = express();
 
+groupCallHandler.createPeerServerListeners(peerServer);
+
 const server = app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
   console.log(`http://localhost:${PORT}`);
 });
+
+const peerServer = ExpressPeerServer(server,{
+  debug:true
+})
+
+app.use('/peerjs',peerServer)
+
+
 
 const io = socket(server, {
   cors: {
@@ -36,7 +48,7 @@ io.on('connection', (socket) => {
     })
     console.log(peers)
     io.sockets.emit('broadcast',{
-      event:broadcastEvents.ACTIVE_USERS,    //since I will broadcast different types of events,hence it is necessary to specify which type
+      event:broadcastEvents.ACTIVE_USERS,    //since different types of events will be broadcasted,hence it is necessary to specify which type
       activeUsers:peers // sending list of active users to all users
     })
   })
