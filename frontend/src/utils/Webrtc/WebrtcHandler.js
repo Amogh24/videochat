@@ -179,7 +179,7 @@ export const switchForScreenSharingStream = async()=>{
             screenSharingStream = await navigator.mediaDevices.getDisplayMedia({video:true});
             store.dispatch(setScreenSharingActive(true));
             const senders = peerConnection.getSenders();
-            const sender = senders.find(sender => sender.track.kind == screenSharingStream.getVideoTracks()[0].kind)  //this finds out which user is going to share screen
+            const sender = senders.find(sender => sender.track.kind === screenSharingStream.getVideoTracks()[0].kind)  //this finds out which user is going to share screen
             sender.replaceTrack(screenSharingStream.getVideoTracks()[0]);//we replace the video of the person who will share the screen with his screen 
         
     } catch (error) {
@@ -188,7 +188,7 @@ export const switchForScreenSharingStream = async()=>{
     }else{
         const localStream = store.getState().call.localStream;
         const senders = peerConnection.getSenders();
-        const sender = senders.find(sender => sender.track.kind == localStream.getVideoTracks()[0].kind) 
+        const sender = senders.find(sender => sender.track.kind === localStream.getVideoTracks()[0].kind) 
         sender.replaceTrack(localStream.getVideoTracks()[0]);  //replacing shared screen with video
         store.dispatch(setScreenSharingActive(false));
         screenSharingStream.getTracks().forEach(track=>track.stop());

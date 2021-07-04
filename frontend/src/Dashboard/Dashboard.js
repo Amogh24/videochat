@@ -7,10 +7,11 @@ import './Dashboard.css'
 import ActiveUsersList from '../Users';
 import * as webRTCHandler from '../utils/Webrtc/WebrtcHandler'
 import DirectCall from './DirectCall/DirectCall'
-
-import { Container,Row,Col } from "react-bootstrap";
+import { callStates } from "../store/actions/callActions"
 import { Socket } from "socket.io-client"
-export default function Dashboard() {
+import DashboardInformation from "./DashboardInfo/DashboardInfo"
+import { connect } from "react-redux"
+const Dashboard=({username,callState})=> {
    useEffect(()=>{
      webRTCHandler.getLocalStream()
    },[])
@@ -36,6 +37,7 @@ export default function Dashboard() {
       <div className='dashboard_left_section'>
         <div className='dashboard_content_container'>
             <DirectCall/>
+            {callState!==callStates.CALL_IN_PROGRESS&&<DashboardInformation username={username}/>}
         </div>
         <div className='dashboard_rooms_container background_secondary_color'>
             rooms
@@ -52,31 +54,13 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
-{/*      
-        <Container style={{color:"black",height:"100%",width:"100%"}}>
-           <Row xl={12}>
-             <Col>
-           <Card style={{textAlign:"center",width:"100px"}}>
-              <Card.Body>Rooms</Card.Body>
-               </Card>
-              </Col>
-               <Col>
-            <Card style={{textAlign:"center"}}>
-               <Card.Body>Content</Card.Body>
-               </Card>
-               </Col>
-               <Col>
-             <Card style={{textAlign:"center"}}>
-               <Card.Body>Active Users</Card.Body>
-               </Card>
-               </Col> */}
-            
 
-        {/* </Row> */}
-        {/* </Container> */}
-      {/* <div style={{textAlign:"center",justifyContent:"center",width:"10%"}}>
-       
-      </div> */}
     </>
   )
+ 
 }
+const mapStateToProps = ({call,dashboard})=>({
+  ...call,
+  ...dashboard
+})
+export default connect(mapStateToProps)(Dashboard)

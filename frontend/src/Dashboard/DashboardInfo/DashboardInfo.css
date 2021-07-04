@@ -1,0 +1,18 @@
+.dashboard_info_text_container {
+    
+    display: flex;
+    flex-direction: column;
+    width:15vw;
+    
+  }
+  
+  .dashboard_info_text_title {
+    font-size: 30px;
+    
+  }
+  
+  .dashboard_info_text_description {
+    margin-top: 0px;
+    font-size: 20px;
+  }
+  
