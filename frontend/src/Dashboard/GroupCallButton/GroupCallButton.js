@@ -1,12 +1,12 @@
 import React from 'react';
-
+import { Button } from 'react-bootstrap';
 import './GroupCallButton.css';
 
 const GroupCallButton = ({ onClickHandler, label }) => {
   return (
-    <button onClick={onClickHandler} className='group_call_button'>
+    <Button onClick={onClickHandler} className='group_call_button'>
       {label}
-    </button>
+    </Button>
   );
 };
 
