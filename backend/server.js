@@ -2,6 +2,7 @@ const express = require('express');
 const socket = require('socket.io'); //socket.io : signalling server for 1-1 call 
 const {ExpressPeerServer} = require('peer')//peerjs: signalling server for group call
 const groupCallHandler = require('./groupCallHandler')
+const {v4:uuidv4} = require('uuid')
 
 const PORT = 5000;
 
@@ -31,6 +32,8 @@ const io = socket(server, {
 });
 
 let peers = []  //list of users
+let groupCallRooms = []  //list of group call rooms 
+
 const broadcastEvents ={
   ACTIVE_USERS: 'ACTIVE_USERS',
   GROUP_CALL_ROOMS:'GROUP_CALL_ROOMS'
@@ -98,6 +101,21 @@ io.on('connection', (socket) => {
     console.log("informing peer that other user has hanged up");
     io.to(data.userId).emit('user-hanged-up')
   })
+  //listeners for group calls
+socket.on('register group call',(data)=>{
+  roomId = uuidv4();
+  socket.join(roomId)
+  console.log("registering group call");
+  const groupCallRoom = {
+    hostName:data.username,
+    peerId:data.peerId,
+    socketId:socket.id,
+    roomId:roomId
+  }
+  groupCallRooms.push(groupCallRoom)
+  console.log(groupCallRooms)
+})
+
 });
 
 

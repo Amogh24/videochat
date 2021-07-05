@@ -21,7 +21,7 @@ export const connectWithMyPeer = ()=>{
 
 export const createNewGroupCall = () =>{
   wss.registerGroupCall({
-    username:store.getState().dashboatd.username + "'s Room",
+    username:store.getState().dashboard.username + "'s Room",
     peerId:myPeerId
   })
 }
