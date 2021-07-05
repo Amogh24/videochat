@@ -13,6 +13,7 @@ import { Socket } from "socket.io-client"
 import DashboardInformation from "./DashboardInfo/DashboardInfo"
 import { connect } from "react-redux"
 import GroupCallRoomsList from "./GroupCalls/GroupCallRoomsList"
+import GroupCall from "./GroupCall/GroupCall"
 
 const Dashboard=({username,callState})=> {
    useEffect(()=>{
@@ -41,6 +42,7 @@ const Dashboard=({username,callState})=> {
       <div className='dashboard_left_section'>
         <div className='dashboard_content_container'>
             <DirectCall/>
+            <GroupCall/>
             {callState!==callStates.CALL_IN_PROGRESS&&<DashboardInformation username={username}/>}
         </div>
         <div className='dashboard_rooms_container background_secondary_color'>

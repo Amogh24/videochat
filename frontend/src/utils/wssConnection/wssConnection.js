@@ -71,11 +71,16 @@ export const sendWebRTCCandidate = (data)=>{
 }
 
 export const sendUserHangedUp = (data)=>{
-    socket.emit('user-hanged-up',data);
+    socket.emit('user-hanged-up',data);           //sending info that the user has ended the call
 }
+
+export const registerGroupCall = (data) =>{
+    socket.emit('register group call',data);      //sending info regarding group call to signalling server
+}
+
 const handleBroadCastEvents = (data)=>{
     switch(data.event){
-        case broadcastEvents.ACTIVE_USERS:
+        case broadcastEvents.ACTIVE_USERS:      //sends list of active users to all users
           const activeUsers = data.activeUsers.filter(activeUser =>activeUser.socketId!==socket.id)//ensuring that user doesn't see herself on the sidescreen
           store.dispatch(dashboardActions.setActiveUsers(activeUsers)) 
           break;
