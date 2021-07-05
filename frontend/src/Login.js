@@ -43,7 +43,7 @@ const Login =  function ({saveUsername}){
     return(
         <div style={{justifyContent:"center",alignItems:"center",marginTop:"10vh",maxWidth:"400px",height:"90vh",marginLeft:"auto",marginRight:"auto"}}>
         
-          <h1 style={{color:"white",width:"400px",marginBottom:"10px",textAlign:"center" }}> VideoChat</h1>
+          <h1 style={{color:"white",width:"400px",marginBottom:"10px",textAlign:"center" }}> VConnect</h1>
         <Card style={{height:"65%",padding:"20px",paddingBottom:"30px"}}>
         <h2 className="text-center mb-4 mt-10">Login</h2>
         {error && <Alert variant="danger">{error}</Alert>}

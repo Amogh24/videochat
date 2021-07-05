@@ -52,7 +52,7 @@ const Dashboard=({username,callState})=> {
           {callState!==callStates.CALL_IN_PROGRESS&&<ActiveUsersList/>}
         </div>
         <div className='dashboard_logo_container'>
-        <Button  variant="link" onClick={handleLogout}>
+        <Button  variant="info" onClick={handleLogout}>
           Log Out
         </Button>
         </div>
