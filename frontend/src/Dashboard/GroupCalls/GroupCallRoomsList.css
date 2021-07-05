@@ -1,0 +1,16 @@
+.group_calls_list_item {
+    display: flex;
+    height: 100%;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: 0.3s;
+    margin-right: 5px;
+    border-radius: 8px;
+  }
+  
+  .group_calls_list_item:hover {
+    background-color: #dddcf0;
+    color:black
+  }

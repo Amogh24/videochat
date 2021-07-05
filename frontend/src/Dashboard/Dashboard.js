@@ -12,6 +12,8 @@ import { callStates } from "../store/actions/callActions"
 import { Socket } from "socket.io-client"
 import DashboardInformation from "./DashboardInfo/DashboardInfo"
 import { connect } from "react-redux"
+import GroupCallRoomsList from "./GroupCalls/GroupCallRoomsList"
+
 const Dashboard=({username,callState})=> {
    useEffect(()=>{
      webRTCHandler.getLocalStream();
@@ -42,12 +44,12 @@ const Dashboard=({username,callState})=> {
             {callState!==callStates.CALL_IN_PROGRESS&&<DashboardInformation username={username}/>}
         </div>
         <div className='dashboard_rooms_container background_secondary_color'>
-            rooms
+         <GroupCallRoomsList/>
         </div>
       </div>
       <div className='dashboard_right_section background_secondary_color'>
         <div className='dashboard_active_users_list'>
-          <ActiveUsersList/>
+          {callState!==callStates.CALL_IN_PROGRESS&&<ActiveUsersList/>}
         </div>
         <div className='dashboard_logo_container'>
         <Button  variant="link" onClick={handleLogout}>
