@@ -114,6 +114,11 @@ socket.on('register group call',(data)=>{
   }
   groupCallRooms.push(groupCallRoom)
   console.log(groupCallRooms)
+
+  io.sockets.emit('broadcast',{
+    event:broadcastEvents.GROUP_CALL_ROOMS,
+    groupCallRooms
+  })
 })
 
 });

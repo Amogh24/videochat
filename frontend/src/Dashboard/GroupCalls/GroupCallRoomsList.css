@@ -8,6 +8,7 @@
     transition: 0.3s;
     margin-right: 5px;
     border-radius: 8px;
+    text-align: center;
   }
   
   .group_calls_list_item:hover {

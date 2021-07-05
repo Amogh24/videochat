@@ -86,5 +86,8 @@ const handleBroadCastEvents = (data)=>{
           break;
           default:
               break; 
+        case broadcastEvents.GROUP_CALL_ROOMS:
+          const groupCallRooms = data.groupCallRooms
+          store.dispatch(dashboardActions.setGroupCallRooms(groupCallRooms))  //everytime a new groupcall room is added, the list is updated 
     }
 }
