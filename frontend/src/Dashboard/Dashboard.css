@@ -7,7 +7,7 @@
   
   .dashboard_left_section {
     width: 80%;
-    
+    margin-left: 0;
     display: flex;
     margin-right: 70%;
     flex-direction: column ;

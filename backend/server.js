@@ -121,7 +121,13 @@ socket.on('register group call',(data)=>{
   })
 })
 
+socket.on('user-wants-to-join-group-call',(data) =>{
+  io.to(data.roomId).emit('user-wants-to-join-group-call',{  //sending event regarding new user to all users present in the rooom
+    peerId:data.peerId,
+    streamId:data.localStreamId
+  })
+  socket.join(data.roomId)
 });
-
+})
 
 

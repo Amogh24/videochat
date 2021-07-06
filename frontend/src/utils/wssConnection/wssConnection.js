@@ -2,6 +2,8 @@ import socketClient from 'socket.io-client'
 import store from '../../store/store';
 import * as dashboardActions from '../../store/actions/dashboardActions'
 import * as webRTChandler from '../Webrtc/WebrtcHandler'
+import * as webRTCGroupCallHandler from '../Webrtc/webRTCGroupCallHandler'
+
 const SERVER = 'http://localhost:5000'
 
 let socket;
@@ -38,6 +40,11 @@ export const connectWithWebSocket = () =>{
     })
     socket.on('user-hanged-up',(data)=>{
         webRTChandler.handleUserHangUp(data)
+    })
+
+    //listeners for group call
+    socket.on('user-wants-to-join-group-call',(data)=>{
+        webRTCGroupCallHandler.connectToNewUser(data)
     })
 }
 
@@ -76,6 +83,10 @@ export const sendUserHangedUp = (data)=>{
 
 export const registerGroupCall = (data) =>{
     socket.emit('register group call',data);      //sending info regarding group call to signalling server
+}
+
+export const incomingUser = (data)=>{
+    socket.emit('user-wants-to-join-group-call',data) //sending info regarding incoming user request to signalling server
 }
 
 const handleBroadCastEvents = (data)=>{

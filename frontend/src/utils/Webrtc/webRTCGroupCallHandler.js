@@ -28,3 +28,19 @@ export const createNewGroupCall = () =>{
   store.dispatch(setGroupCallActive(true))
   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
 }
+
+export const joinGroupCall = (hostSocketId,roomId)=>{  //function which calls incoming user function from wss which sends info to server
+  const localStream  = store.getState().call.localStream
+  wss.incomingUser({
+    peerId:myPeerId,
+    hostSocketId,
+    roomId,
+    localStreamId:localStream.id
+  })
+  store.dispatch(setGroupCallActive(true))
+  store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
+}
+
+export const connectToNewUser = (data)=>{
+  //hello
+}
