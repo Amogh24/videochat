@@ -13,7 +13,8 @@ const initState = {
   localCamEnabled:true,
   localMicEnabled:true,
   screenSharingActive:false,
-  groupCallActive:false
+  groupCallActive:false,
+  groupCallStreams:[]
 };
 
 const reducer = (state = initState, action) => {    //this basically changes the state  
@@ -78,6 +79,11 @@ const reducer = (state = initState, action) => {    //this basically changes the
               localMicEnabled:true,
               localCamEnabled:true,
 
+            }
+          case callActions.CALL_SET_GROUP_CALL_STREAMS:
+            return{
+              ...state,
+              groupCallStreams:action.groupCallStreams
             }
 
     default:

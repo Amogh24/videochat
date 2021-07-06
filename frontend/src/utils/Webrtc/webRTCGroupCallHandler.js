@@ -1,4 +1,4 @@
-import { callStates, setCallState, setGroupCallActive } from "../../store/actions/callActions";
+import { callStates, setCallState, setGroupCallActive, setGroupCallIncomingStreams } from "../../store/actions/callActions";
 import store from "../../store/store";
 import * as  wss from "../wssConnection/wssConnection"
 
@@ -22,6 +22,11 @@ export const connectWithMyPeer = ()=>{
     call.answer(store.getState().call.localStream)
     call.on('stream',incomingStream=>{
       console.log("stream arrived")
+      const streams = store.getState().call.groupCallStreams;
+      const stream = streams.find(stream=>stream.id === incomingStream.id); //checking if the incoming stream already exists in the group call
+      if(!stream){
+        addVideoStream(incomingStream)
+      }
     })
   })
 }
@@ -47,11 +52,23 @@ export const joinGroupCall = (hostSocketId,roomId)=>{  //function which calls in
   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
 }
 
-export const connectToNewUser = (data)=>{
+export const connectNewUser = (data)=>{
   //function to add user to group call
   const localStream = store.getState().call.localStream   //fetching localstream from the store
   const call = myPeer.call(data.peerId,localStream);  //Calls the remote peer specified by id and returns a media connection.
   call.on('stream',(incomingStream)=>{
     console.log('stream came');
+    const streams = store.getState().call.groupCallStreams;
+    const stream = streams.find(stream=>stream.id === incomingStream.id); //checking if the incoming stream already exists in the group call
+    if(!stream){
+      addVideoStream(incomingStream)
+    }
   })
+}
+export const addVideoStream = (incomingStream)=>{
+  const groupCallStreams = [
+    ...store.getState().call.groupCallStreams,
+    incomingStream
+  ]
+  store.dispatch(setGroupCallIncomingStreams(groupCallStreams))
 }

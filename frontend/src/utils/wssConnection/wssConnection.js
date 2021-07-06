@@ -44,7 +44,7 @@ export const connectWithWebSocket = () =>{
 
     //listeners for group call
     socket.on('user-wants-to-join-group-call',(data)=>{
-        webRTCGroupCallHandler.connectToNewUser(data)
+        webRTCGroupCallHandler.connectNewUser(data)
     })
 }
 
