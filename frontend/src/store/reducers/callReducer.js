@@ -12,10 +12,11 @@ const initState = {
   remoteStream:null,
   localCamEnabled:true,
   localMicEnabled:true,
-  screenSharingActive:false
+  screenSharingActive:false,
+  groupCallActive:false
 };
 
-const reducer = (state = initState, action) => {    //tbis basically changes the state  
+const reducer = (state = initState, action) => {    //this basically changes the state  
   switch (action.type) {
     case callActions.CALL_SET_LOCAL_STREAM:
       return {
@@ -61,6 +62,11 @@ const reducer = (state = initState, action) => {    //tbis basically changes the
             return{
               ...state,
               screenSharingActive:action.active
+            }
+          case callActions.CALL_SET_GROUP_CALL_ACTIVE:
+            return{
+              ...state,
+              groupCallActive:action.active
             }
           case callActions.CALL_RESET_CALL_DATA:
             return{

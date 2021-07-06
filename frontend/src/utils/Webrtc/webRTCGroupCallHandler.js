@@ -1,3 +1,4 @@
+import { callStates, setCallState, setGroupCallActive } from "../../store/actions/callActions";
 import store from "../../store/store";
 import * as  wss from "../wssConnection/wssConnection"
 
@@ -24,4 +25,6 @@ export const createNewGroupCall = () =>{
     username:store.getState().dashboard.username + "'s Room",
     peerId:myPeerId
   })
+  store.dispatch(setGroupCallActive(true))
+  store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
 }
