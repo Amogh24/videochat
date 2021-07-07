@@ -135,6 +135,15 @@ socket.on('user is leaving group call',(data)=>{
     streamId:data.streamId
   })
 })
+
+socket.on('call-closed-by-host',(data)=>{
+  groupCallRooms = groupCallRooms.filter(room=>
+    room.peerId!==data.peerId)      //removing the closed room from list of active rooms
+    io.sockets.emit('broadcast',{
+      event:broadcastEvents.GROUP_CALL_ROOMS,
+      groupCallRooms
+  })
+})
 })
 
 

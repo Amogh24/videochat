@@ -96,16 +96,30 @@ export const userLeaving = (data)=>{
     socket.emit('user is leaving group call',data)
 }
 
+export const callClosedByHost = (data)=>{
+    socket.emit('call-closed-by-host',data)   //sending info to signalling server that host ended thr call
+}
+
 const handleBroadCastEvents = (data)=>{
     switch(data.event){
         case broadcastEvents.ACTIVE_USERS:      //sends list of active users to all users
           const activeUsers = data.activeUsers.filter(activeUser =>activeUser.socketId!==socket.id)//ensuring that user doesn't see herself on the sidescreen
           store.dispatch(dashboardActions.setActiveUsers(activeUsers)) 
           break;
-          default:
-              break; 
+           
         case broadcastEvents.GROUP_CALL_ROOMS:
-          const groupCallRooms = data.groupCallRooms
+          const groupCallRooms = data.groupCallRooms.filter(room=>room.socketId!==socket.id)
+          
+          const activeGroupCallRoomId = webRTCGroupCallHandler.checkActive()
+          if(activeGroupCallRoomId){
+              const room = groupCallRooms.find(room=>room.roomId === activeGroupCallRoomId)
+              if(!room){
+                  webRTCGroupCallHandler.clearCallData();
+              }
+          }
           store.dispatch(dashboardActions.setGroupCallRooms(groupCallRooms))  //everytime a new groupcall room is added, the list is updated 
+          break;
+        default:
+              break;
     }
 }

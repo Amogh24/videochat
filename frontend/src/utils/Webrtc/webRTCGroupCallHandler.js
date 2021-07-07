@@ -5,6 +5,7 @@ import * as  wss from "../wssConnection/wssConnection"
 let myPeer;
 let myPeerId;
 let callRoomId;
+let groupCallHost = false;
 
 export const connectWithMyPeer = ()=>{
   myPeer = new window.Peer(undefined,{
@@ -33,6 +34,7 @@ export const connectWithMyPeer = ()=>{
 }
 
 export const createNewGroupCall = () =>{
+  groupCallHost = true;
   wss.registerGroupCall({
     username:store.getState().dashboard.username + "'s Room",
     peerId:myPeerId
@@ -42,11 +44,24 @@ export const createNewGroupCall = () =>{
 }
 
 export const exitGroupCall = () =>{
+if(groupCallHost){
+  wss.callClosedByHost({
+    peerId:myPeerId
+  })
+}else{
   wss.userLeaving({
     streamId:store.getState().call.localStream.id,
     roomId:callRoomId
   })
+}
+
+ 
+ clearCallData()
+}
+
+export const clearCallData = ()=>{
   callRoomId = null;
+  groupCallHost = null;
   store.dispatch(clearGroupCallData());
   myPeer.destroy(); //for leaving the group call we destroy the current peer connection
   connectWithMyPeer(); //create new peer connection for subsequent calls
@@ -91,4 +106,12 @@ export const addVideoStream = (incomingStream)=>{
     incomingStream
   ]
   store.dispatch(setGroupCallIncomingStreams(groupCallStreams))
+}
+
+export const checkActive = () =>{
+  if(store.getState().call.groupCallActive){  //if call is active, the function returns the id
+    return callRoomId
+  }else{
+    return false;
+  }
 }
