@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-
+import store from '../../store/store';
 const styles = {
   videoContainer: {
     width: '300px',
@@ -24,11 +24,14 @@ const GroupCallVideo = ({ stream }) => {
       remoteGroupCallVideo.play();
     };
   }, [stream]);   //stream is the dependency for this use effect, every time a new user joins, component will be re rendered
-
+  
+  
   return (
     <div style={styles.videoContainer}>
       <video ref={videoRef} autoPlay style={styles.videoElement} />
+       
     </div>
+   
   );
 };
 

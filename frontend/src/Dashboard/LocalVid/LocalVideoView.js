@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-
+import store from '../../store/store';
 const styles = {
   videoContainer: {
     width: '180px',
@@ -19,6 +19,7 @@ const styles = {
 const LocalVideoView = props => {
   const { localStream } = props;
   const localVideoRef = useRef();
+  const name = store.getState().dashboard.username
 
   useEffect(() => {
     if (localStream) {
@@ -34,6 +35,7 @@ const LocalVideoView = props => {
   return (
     <div style={styles.videoContainer}>
       <video style={styles.videoElement} ref={localVideoRef} autoPlay muted />
+      <h4 style={{color:"white",textAlign:"center"}}>{name}</h4> 
     </div>
   );
 };

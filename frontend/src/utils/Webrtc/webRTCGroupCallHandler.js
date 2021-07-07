@@ -54,8 +54,6 @@ if(groupCallHost){
     roomId:callRoomId
   })
 }
-
- 
  clearCallData()
 }
 
