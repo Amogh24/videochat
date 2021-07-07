@@ -85,6 +85,13 @@ const reducer = (state = initState, action) => {    //this basically changes the
               ...state,
               groupCallStreams:action.groupCallStreams
             }
+          case callActions.CALL_CLEAR_GROUP_CALL_DATA:   //resets the properties related to group call to their default values
+            return{
+              ...state,
+              groupCallActive:false,
+              groupCallStreams:[],
+              callState: callActions.callStates.CALL_AVAILABLE
+            }
 
     default:
       return state;

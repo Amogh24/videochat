@@ -128,6 +128,13 @@ socket.on('user-wants-to-join-group-call',(data) =>{
   })
   socket.join(data.roomId)
 });
+
+socket.on('user is leaving group call',(data)=>{
+  socket.leave(data.roomId)//leave the call room
+  io.to(data.roomId).emit('user is leaving group call',{   //send info to other users in the room that user has left the call 
+    streamId:data.streamId
+  })
+})
 })
 
 

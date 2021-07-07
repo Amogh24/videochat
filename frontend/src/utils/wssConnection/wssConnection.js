@@ -46,6 +46,9 @@ export const connectWithWebSocket = () =>{
     socket.on('user-wants-to-join-group-call',(data)=>{
         webRTCGroupCallHandler.connectNewUser(data)
     })
+    socket.on('user is leaving group call',(data)=>{
+        webRTCGroupCallHandler.removeStream(data)   //on receiving info that a user is leaving the group call, use the remove stream function to remove that users stream
+    })
 }
 
 export const sendPreOfferAnswer = (data)=>{
@@ -87,6 +90,10 @@ export const registerGroupCall = (data) =>{
 
 export const incomingUser = (data)=>{
     socket.emit('user-wants-to-join-group-call',data) //sending info regarding incoming user request to signalling server
+}
+
+export const userLeaving = (data)=>{
+    socket.emit('user is leaving group call',data)
 }
 
 const handleBroadCastEvents = (data)=>{

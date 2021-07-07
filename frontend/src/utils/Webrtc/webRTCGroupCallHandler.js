@@ -1,9 +1,10 @@
-import { callStates, setCallState, setGroupCallActive, setGroupCallIncomingStreams } from "../../store/actions/callActions";
+import { callStates, setCallState, setGroupCallActive, setGroupCallIncomingStreams,clearGroupCallData } from "../../store/actions/callActions";
 import store from "../../store/store";
 import * as  wss from "../wssConnection/wssConnection"
 
 let myPeer;
 let myPeerId;
+let callRoomId;
 
 export const connectWithMyPeer = ()=>{
   myPeer = new window.Peer(undefined,{
@@ -40,8 +41,27 @@ export const createNewGroupCall = () =>{
   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
 }
 
+export const exitGroupCall = () =>{
+  wss.userLeaving({
+    streamId:store.getState().call.localStream.id,
+    roomId:callRoomId
+  })
+  callRoomId = null;
+  store.dispatch(clearGroupCallData());
+  myPeer.destroy(); //for leaving the group call we destroy the current peer connection
+  connectWithMyPeer(); //create new peer connection for subsequent calls
+}
+
+export const removeStream = (data)=>{   //function to remove stream of a user who left the call
+  const groupCallStreams = store.getState().call.groupCallStreams.filter(  
+    stream =>stream.id !== data.streamId  //data will contain the streamid of a user who has left the call
+  )
+  store.dispatch(setGroupCallIncomingStreams(groupCallStreams))
+}
+
 export const joinGroupCall = (hostSocketId,roomId)=>{  //function which calls incoming user function from wss which sends info to server
   const localStream  = store.getState().call.localStream
+  callRoomId = roomId
   wss.incomingUser({
     peerId:myPeerId,
     hostSocketId,
