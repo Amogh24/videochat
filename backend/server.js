@@ -63,6 +63,11 @@ io.on('connection', (socket) => {
       event:broadcastEvents.ACTIVE_USERS,
       activeUsers:peers // sending list of active users to all users
     })
+    groupCallRooms = groupCallRooms.filter(room=>room.socketId!=socket.id)
+    io.sockets.emit('broadcast',{
+      event:broadcastEvents.GROUP_CALL_ROOMS,
+      groupCallRooms
+    })
   });
 
   //listeners for direct calls

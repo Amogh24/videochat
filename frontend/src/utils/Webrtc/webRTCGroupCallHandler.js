@@ -65,6 +65,10 @@ export const clearCallData = ()=>{
   store.dispatch(clearGroupCallData());
   myPeer.destroy(); //for leaving the group call we destroy the current peer connection
   connectWithMyPeer(); //create new peer connection for subsequent calls
+
+  const localStream = store.getState().call.localStream
+  localStream.getVideoTracks()[0].enabled = true;
+  localStream.getAudioTracks()[0].enabled = true;
 }
 
 export const removeStream = (data)=>{   //function to remove stream of a user who left the call
