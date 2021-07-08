@@ -3,6 +3,7 @@ import { Form, Button,Card,Alert } from 'react-bootstrap'
 import { useRef,useState } from 'react'
 import { useAuth } from "./AuthContext"
 import { Link,useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Signup(){
     const emailRef = useRef()
