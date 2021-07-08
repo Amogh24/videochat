@@ -7,6 +7,7 @@ import axios from 'axios'
 
 export default function Signup(){
     const emailRef = useRef()
+    const usernameRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
     const { signup } = useAuth()
@@ -34,11 +35,15 @@ export default function Signup(){
     }
 
     return(
-        <div style={{justifyContent:"center",alignItems:"center",marginTop:"20vh",width:"25%",height:"80vh",marginLeft:"auto",marginRight:"auto"}}>
-        <Card style={{height:"65%",padding:"20px",paddingBottom:"30px",width:"100%"}}>
+        <div style={{justifyContent:"center",alignItems:"center",marginTop:"20vh",width:"25%",height:"80vh",marginLeft:"auto",marginRight:"auto",minWidth:'400px'}}>
+        <Card style={{height:"500px",padding:"20px",paddingBottom:"30px",width:"100%"}}>
         <h2 className="text-center mb-4 mt-10">Sign Up</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+        <Form.Group id="username" >
+              <Form.Label>Username</Form.Label>
+              <Form.Control type="text" ref={usernameRef} required />
+            </Form.Group>
         <Form.Group id="email" >
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
