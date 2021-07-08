@@ -21,7 +21,7 @@ const styles = {
 };
 
 const LocalVideoView = props => {
-  const { remoteStream } = props;
+  const { remoteStream,callerUsername } = props;
   const remoteVideoRef = useRef();
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const LocalVideoView = props => {
   return (
     <div style={styles.videoContainer}>
       <video style={styles.videoElement} ref={remoteVideoRef} autoPlay />
-      
+      <h4 style={{color:"black",textAlign:"center"}}>{callerUsername}</h4>
     </div>
   );
 };

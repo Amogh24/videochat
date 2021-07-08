@@ -10,7 +10,7 @@ const DashboardInformation = ({ username }) => {
       </span>
       <span className='dashboard_info_text_description' style = {{width:"30vw"}}>
       You can start a one-to-one call to a person from the list or
-        you can create or join a group call.
+        you can create or join a group call room.
       </span>
     </div>
   );
