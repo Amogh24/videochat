@@ -81,7 +81,8 @@ io.on('connection', (socket) => {
   socket.on('preofferanswer',(data)=>{
     console.log("handling the preoffer answer");
     io.to(data.callerSocketId).emit('preofferanswer',{
-      answer:data.answer
+      answer:data.answer,
+      calleeName:data.calleeName
     })
   })
   socket.on('webRTC-offer',(data)=>{

@@ -81,7 +81,8 @@ export const handlePreOffer = (data)=>{
     } else{
         wss.sendPreOfferAnswer({
             callerSocketId:data.callerSocketId,
-            answer:preOfferAnswers.CALL_NOT_AVAILABLE
+            answer:preOfferAnswers.CALL_NOT_AVAILABLE,
+            
         })
     }
    
@@ -90,7 +91,8 @@ export const handlePreOffer = (data)=>{
 export const acceptIncomingCall = ()=>{
     wss.sendPreOfferAnswer({
         callerSocketId:userId,
-        answer:preOfferAnswers.CALL_ACCEPTED
+        answer:preOfferAnswers.CALL_ACCEPTED,
+        calleeName:store.getState().dashboard.username
     })
     store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
 
@@ -113,6 +115,8 @@ export const resetCallData = ()=>{
 export const handlePreOfferAnswer=(data)=>{
 
     store.dispatch(setCallingDialogVisible(false))
+    store.dispatch(setCallerUsername(data.calleeName))
+    console.log(store.getState.call.callerUsername)
     if(data.answer === preOfferAnswers.CALL_ACCEPTED){
         //send webrtc offer
         sendOffer()
