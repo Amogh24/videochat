@@ -7,6 +7,7 @@ import Dashboard from './Dashboard/Dashboard'
 import PrivateRoute from './PrivateRoute'
 import ForgotPassword from './Forgot';
 import Chat from "./Chat";
+import Landing from "./LandingPage";
 
  export default function Home(){
     return (
@@ -19,6 +20,7 @@ import Chat from "./Chat";
                   <PrivateRoute exact path="/" component={Dashboard} />
                   {/* <PrivateRoute path="/update-profile" component={UpdateProfile} /> */}
                   <PrivateRoute exact path = "/chat" component = {Chat}/>
+                  <PrivateRoute exact path = "/landing" component ={Landing}/>
                   <Route path="/signup" component={Signup} />
                   <Route path="/login" component={Login} />
                   
