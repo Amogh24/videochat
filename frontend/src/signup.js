@@ -28,6 +28,8 @@ export default function Signup(){
         setLoading(true)
         await signup(emailRef.current.value, passwordRef.current.value)
         store.dispatch(setUsername(usernameRef.current.value))
+        localStorage.setItem('username',emailRef.current.value)
+        localStorage.setItem('password',passwordRef.current.value)
         var axios = require('axios');
 var data = {
 	"username": emailRef.current.value,

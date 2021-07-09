@@ -5,7 +5,9 @@ import { useAuth } from "./AuthContext"
 import { Link ,useHistory} from 'react-router-dom'
 import { connect } from 'react-redux';
 import { setUsername } from './store/actions/dashboardActions';
+import { setUser,setSecret } from './store/actions/chatActions'
 import { registerNewUser } from './utils/wssConnection/wssConnection'
+import store from './store/store'
 
 const Login =  function ({saveUsername}){
  
@@ -29,6 +31,12 @@ const Login =  function ({saveUsername}){
        
         await login(emailRef.current.value, passwordRef.current.value)
         setLoading(false)
+        localStorage.setItem('username',emailRef.current.value)
+        localStorage.setItem('password',passwordRef.current.value)
+        store.dispatch(setUser(emailRef.current.value))
+        const username = store.getState().chat.username
+        console.log(username)
+        store.dispatch(setSecret(passwordRef.current.value))
         saveUsername(usernameRef.current.value);
         registerNewUser(usernameRef.current.value)
          history.push("/")
