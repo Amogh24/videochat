@@ -2,10 +2,14 @@ import react from 'react'
 import { Button,Container,Row,Col } from 'react-bootstrap'
 import videocallroom from './videocallroom.jpg'
 import chatroom from './chatroom.jpg'
+import {Link} from 'react-router-dom'
 // import './LandingPage.css'
 const Landing = ()=>{
     return(
+      
+      
       <Container >
+        <Row><h1 style={{textAlign:"center",color:"white",marginTop:"10px",fontSize:"60px"}}>Welcome to VConnect</h1></Row>
         <Row style={{marginBottom:"5px"}}>
           <Col style={{justifyContent:"center",marginLeft:"auto",marginRight:"auto",marginBottom:"0px"}}>
           <img src={videocallroom}alt="Video Call Room" height="200px" style={{display:"block",marginLeft:"auto",marginRight:"auto",borderRadius:"8px",marginTop:"30vh"}}/>
@@ -16,10 +20,11 @@ const Landing = ()=>{
         </Row>
         <Row >
           <Col>
-          <Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Video Rooms</Button>
+          
+          <Link to="/"><Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Video Rooms</Button></Link>
           </Col>
           <Col>
-          <Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Chat Rooms</Button>
+          <Link to="/chat"><Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Chat Rooms</Button></Link>
           </Col>
         </Row>
          {/* <div style = {{marginLeft:"30%"}}>
