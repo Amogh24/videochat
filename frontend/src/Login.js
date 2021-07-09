@@ -39,7 +39,7 @@ const Login =  function ({saveUsername}){
         store.dispatch(setSecret(passwordRef.current.value))
         saveUsername(usernameRef.current.value);
         registerNewUser(usernameRef.current.value)
-         history.push("/")
+         history.push("/landing")
       } catch {
         setLoading(false)
         setError("Failed to sign in")

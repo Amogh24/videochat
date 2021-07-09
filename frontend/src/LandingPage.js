@@ -24,7 +24,7 @@ const Landing = ()=>{
           <Link to="/"><Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Video Rooms</Button></Link>
           </Col>
           <Col>
-          <Link to="/chat"><Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Chat Rooms</Button></Link>
+          <Link to="/chat" target="_blank" rel="noopener noreferrer"><Button style={{display:"block",marginLeft:"auto",marginRight:"auto",marginTop:"0%"}}>Head to Chat Rooms</Button></Link>
           </Col>
         </Row>
          {/* <div style = {{marginLeft:"30%"}}>
