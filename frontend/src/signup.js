@@ -4,7 +4,8 @@ import { useRef,useState } from 'react'
 import { useAuth } from "./AuthContext"
 import { Link,useHistory } from 'react-router-dom'
 import axios from 'axios'
-
+import store from './store/store'
+import { setUsername } from './store/actions/dashboardActions'
 export default function Signup(){
     const emailRef = useRef()
     const usernameRef = useRef()
@@ -14,7 +15,7 @@ export default function Signup(){
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
      const history = useHistory()
-
+    
     async function handleSubmit(e) {
       e.preventDefault()
   
@@ -26,6 +27,30 @@ export default function Signup(){
         setError("")
         setLoading(true)
         await signup(emailRef.current.value, passwordRef.current.value)
+        store.dispatch(setUsername(usernameRef.current.value))
+        var axios = require('axios');
+var data = {
+	"username": emailRef.current.value,
+	"secret": passwordRef.current.value,
+	"first_name":usernameRef.current.value,
+};
+
+var config = {
+	method: 'post',
+	url: 'https://api.chatengine.io/users/',
+	headers: {
+		'PRIVATE-KEY': '{{eaac8ccd-7841-4bd3-87c2-3c7c08f42498}}'
+	},
+	data : data
+};
+
+axios(config)
+.then(function (response) {
+	console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+	console.log(error);
+});
          history.push("/")
       } catch {
         setError("Failed to create an account")

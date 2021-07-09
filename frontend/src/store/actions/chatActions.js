@@ -1,0 +1,1 @@
+export const CHAT_SET_USERNAME = 'CHAT_SET_USERNAME'
