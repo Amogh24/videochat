@@ -53,7 +53,7 @@ axios(config)
 .catch(function (error) {
 	console.log(error);
 });
-         history.push("/")
+         history.push("/landing")
       } catch {
         setError("Failed to create an account")
       }
