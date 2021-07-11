@@ -4,7 +4,7 @@ import * as dashboardActions from '../../store/actions/dashboardActions'
 import * as webRTChandler from '../Webrtc/WebrtcHandler'
 import * as webRTCGroupCallHandler from '../Webrtc/webRTCGroupCallHandler'
 
-const SERVER = 'http://localhost:5000'
+const SERVER = 'https://vconnect-backend.herokuapp.com/'
 
 let socket;
 
