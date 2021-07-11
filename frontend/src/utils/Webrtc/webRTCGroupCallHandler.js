@@ -9,7 +9,7 @@ let groupCallHost = false;
 
 export const connectWithMyPeer = ()=>{
   myPeer = new window.Peer(undefined,{
-      secure:'true',
+      secure:true,
       path:'/peerjs',
       host:'https://vconnect-backend.herokuapp.com/',
       port:'9000'
