@@ -1,14 +1,17 @@
 const express = require('express');
+const cors = require('cors')
 const socket = require('socket.io'); //socket.io : signalling server for 1-1 call 
 const {ExpressPeerServer} = require('peer')//peerjs: signalling server for group call
 const groupCallHandler = require('./groupCallHandler')
 const {v4:uuidv4} = require('uuid')
 
-const PORT = 5000;
+const PORT = process.env.PORT||5000;
 
 const app = express();
-
-
+app.use(cors())
+app.get('/',(req,res)=>{
+  res.send({api:'vconnect-api'})
+})
 
 const server = app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
