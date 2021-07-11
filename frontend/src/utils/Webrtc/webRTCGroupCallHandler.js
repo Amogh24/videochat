@@ -12,7 +12,7 @@ export const connectWithMyPeer = ()=>{
       secure:true,
       path:'/peerjs',
       host:'https://vconnect-backend.herokuapp.com/',
-      port:'9000'
+      port:'443'
   })  
 
 
