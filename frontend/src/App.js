@@ -9,7 +9,7 @@ import Home from './Home'
 function App() {
 
   useEffect(()=>{
-    connectWithWebSocket()
+    connectWithWebSocket()   //connecting to the socket when the app is mounted
   },[])
   return(
     <div><Home/></div>

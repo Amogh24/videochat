@@ -1,4 +1,4 @@
-
+//this file contains declaration of auth module from firebase
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "./firebase"
 
