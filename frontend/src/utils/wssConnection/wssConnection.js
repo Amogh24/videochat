@@ -5,7 +5,6 @@ import * as webRTChandler from '../Webrtc/WebrtcHandler'
 import * as webRTCGroupCallHandler from '../Webrtc/webRTCGroupCallHandler'
 
 const SERVER = 'https://vconnect-backend.herokuapp.com/'
-
 let socket;
 
 const broadcastEvents ={
