@@ -9,10 +9,10 @@ let groupCallHost = false;
 
 export const connectWithMyPeer = ()=>{
   myPeer = new window.Peer(undefined,{
-      secure:true,
+      
       path:'/peerjs',
       host:'/',
-      port:5000
+      port:'5000'
   })  
 
 
