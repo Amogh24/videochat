@@ -11,7 +11,7 @@ export const connectWithMyPeer = ()=>{
   myPeer = new window.Peer(undefined,{
       secure:true,
       path:'/peerjs',
-      host:'/',
+      host:'https://vconnect-backend.herokuapp.com/',
       port:443
   })  
 
