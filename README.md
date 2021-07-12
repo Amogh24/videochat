@@ -22,7 +22,7 @@ VConnect is a communication app where users can chat with each other, have video
 ## Built with
 1) Firebase: used for user authentication
 2) WebRTC: used for one-to-one calls
-3) PeerJS: used for group calls
+3) PeerJs: used for group calls
 4) Socket.io: used as the signalling server
 5) Chat-Engine: used to create chat rooms
 ## Author
