@@ -62,7 +62,7 @@ axios(config)
     }
 
     return(
-        <div style={{justifyContent:"center",alignItems:"center",marginTop:"20vh",width:"25%",height:"80vh",marginLeft:"auto",marginRight:"auto",minWidth:'400px'}}>
+        <div style={{justifyContent:"center",alignItems:"center",marginTop:"10vh",width:"25%",height:"90vh",marginLeft:"auto",marginRight:"auto",minWidth:'400px'}}>
         <Card style={{height:"75%",padding:"20px",paddingBottom:"30px",width:"100%"}}>
         <h2 className="text-center mb-4 mt-10">Sign Up</h2>
         {error && <Alert variant="danger">{error}</Alert>}
