@@ -25,6 +25,8 @@ VConnect is a communication app where users can chat with each other, have video
 3) PeerJs: used for group calls
 4) Socket.io: used as the signalling server
 5) Chat-Engine: used to create chat rooms
+## Browser Supported
+Google Chrome
 ## Author
 Amogh Sachdeva
 
