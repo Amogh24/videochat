@@ -6,6 +6,7 @@ VConnect is a communication app where users can chat with each other, have video
 3) cd into the frontend folder and run "npm install" or "yarn install"
 4) run "npm start" or "yarn start" in the backend folder
 5) run "npm start" or "yarn start" in the frontend folder
+6) signup as a new user and make sure your password is atleast 6 characters long
 ### Prerequisites
 1) Node.js
 2) npm
